@@ -2,7 +2,7 @@ package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione;
 
 import java.util.List;
 
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.Entita.Combattente;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Combattente;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.EventoDiGioco;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.Pubblicatore;
 

@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore;
 
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.Entita.Combattente;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.Entita.Cpu;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Combattente;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Cpu;
 import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.CPU_INIZIALE;
 import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.INTEGRITA_INIZIALE;
 import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.RIGENERAZIONE_CPU_INIZIALE;

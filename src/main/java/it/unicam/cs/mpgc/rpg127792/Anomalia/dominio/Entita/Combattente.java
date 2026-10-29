@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.Entita;
+package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita;
 
 public abstract class Combattente{
 
@@ -13,14 +13,11 @@ public abstract class Combattente{
 
 protected Combattente(String nome, int integritaMassima){
 
-    if(integritaMassima <= 0){
+    if(integritaMassima <= 0)
         throw new IllegalArgumentException("L'integrità massima non può essere 0 o minore.");
-    }
-    
-    if(nome == null){
+    if(nome == null)
         throw new NullPointerException("Il nome non può essere nullo.");
-    }
-
+    
     this.nome=nome;
     this.integritaMassima=integritaMassima;
     this.integrita=integritaMassima;
@@ -55,6 +52,11 @@ protected Combattente(String nome, int integritaMassima){
      return ripristinati;
     }
 
+    public void aumentaIntegritaMassima(int quantita) {
+    int incremento = Math.max(0, quantita);
+    integritaMassima += incremento;
+    integrita += incremento;
+    }
 
     public void aggiungiScudo(int quantita) {
         scudo += Math.max(0, quantita); //l'aggiunta allo scudo non può essere negativa
@@ -63,14 +65,6 @@ protected Combattente(String nome, int integritaMassima){
 
     public void azzeraScudo() {
         scudo = 0;
-    }
-
-
-
-    public void aumentaIntegritaMassima(int quantita) {
-        int incremento = Math.max(0, quantita);
-        integritaMassima += incremento;
-        integrita += incremento;
     }
 
     public boolean isSconfitto() {

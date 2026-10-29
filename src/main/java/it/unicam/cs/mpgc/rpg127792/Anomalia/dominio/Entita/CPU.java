@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.Entita;
+package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita;
 
 
 //CPU==stamina, risorsa consumata dall'attivazione delle abilità del giocatore

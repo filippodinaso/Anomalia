@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.Entita;
+package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita;
 
 //Esito di un colpo subito: quanto è stato assorbito dallo scudo e quanto ha intaccato l'integrità
 
