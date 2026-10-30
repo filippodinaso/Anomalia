@@ -67,8 +67,22 @@ protected Combattente(String nome, int integritaMassima){
         scudo = 0;
     }
 
+    protected void ripristinaStato(int integritaMassima, int integrita) {
+        if (integritaMassima <= 0 || integrita < 0 || integrita > integritaMassima) {
+            throw new IllegalArgumentException("Stato di integrità non valido");
+        }
+        this.integritaMassima = integritaMassima;
+        this.integrita = integrita;
+        this.scudo = 0;
+    }
+
+
     public boolean isSconfitto() {
         return integrita == 0;
+    }
+
+    public int bonusDanni() {
+        return 0;
     }
 
     //Getter

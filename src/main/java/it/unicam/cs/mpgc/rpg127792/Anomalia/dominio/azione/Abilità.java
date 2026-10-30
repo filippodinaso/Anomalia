@@ -6,7 +6,7 @@ package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//Definizione abilità
 public record Abilità(String id, String nome, int costoCpu, int ricarica, Bersaglio bersaglio, List<Effetto> effetti) {
    
  public Abilità{
