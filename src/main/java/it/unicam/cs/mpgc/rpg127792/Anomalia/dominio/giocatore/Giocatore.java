@@ -1,9 +1,13 @@
 package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore;
 
+import java.util.List;
+
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Abilità;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Arsenale;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Combattente;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Cpu;
 import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.CPU_INIZIALE;
+import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.DIMENSIONE_DECK;
 import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.INTEGRITA_INIZIALE;
 import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.RIGENERAZIONE_CPU_INIZIALE;
 
@@ -19,32 +23,46 @@ private final Cpu cpu;
 private int rigenerazioneIntegrita;
 private int danniExtra;
 private final Arsenale arsenale;
+private final List<Abilità> arsenaleIniziale;
 
 
-    public Giocatore() {
+    public Giocatore(List<Abilità> arsenaleIniziale) {
         super(NOME, INTEGRITA_INIZIALE);
         this.cpu = new Cpu(CPU_INIZIALE, CPU_INIZIALE, RIGENERAZIONE_CPU_INIZIALE);
-        this.arsenale=null;
+       
+        this.arsenale= new Arsenale(DIMENSIONE_DECK);
+        this.arsenaleIniziale=List.copyOf(arsenaleIniziale);
+        this.arsenale.inizializza(arsenaleIniziale);
     }
 
     //rigenerazioni inizio scontro
         public void iniziaScontro() {
         azzeraScudo();
         cpu.ripristina();
+        arsenale.azzeraRicariche();
     }
 
     //rigenerazioni inizio turno
-        public void iniziaTurno() {
+        public void iniziaTurno(int numeroTurno) {
+        if(numeroTurno>1)
+             arsenale.avanzaRicariche();
+     
         ripristinaIntegrita(rigenerazioneIntegrita);
         cpu.rigenera();
     }
+
+    public void riavvia() {
+        ripristinaIntegrita(getIntegritaMassima());
+        azzeraScudo();
+        cpu.ripristina();
+    }
+
+
 
      @Override
     public int bonusDanni() {
         return danniExtra;
     }
-
-
 
     //Aumenta statistiche
 

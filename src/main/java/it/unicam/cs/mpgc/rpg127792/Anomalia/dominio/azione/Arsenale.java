@@ -17,6 +17,19 @@ public final class Arsenale {
         this.dimensioneDeck = dimensioneDeck;
     }
 
+    public void inizializza(List<Abilità> abilitàIniziali) {
+        abilitàIniziali.forEach(a -> {
+            sblocca(a);
+            equipaggia(a.id());
+        });
+    }
+
+    public boolean sblocca(Abilità abilita) {
+      if(abilita==null || possiede(abilita.id())) return false;
+        
+        zaino.add(abilita);
+        return true;
+    }
 
     public boolean possiede(String idAbilità){
 
@@ -43,8 +56,8 @@ public final class Arsenale {
         //e la aggiungiamo al deck, altrimenti ritorniamo false.
         return zaino.stream()
                     .filter(a->a.id()
-                    .equals(idAbilità)).
-                    findFirst()
+                    .equals(idAbilità))
+                    .findFirst()
                     .map(a-> deck.add(new AbilitàInUso(a)))
                     .orElse(false);
     
@@ -57,6 +70,10 @@ public final class Arsenale {
 
     public void avanzaRicariche() {
         deck.forEach(AbilitàInUso::avanzaTurno);
+    }
+
+    public void azzeraRicariche() {
+        deck.forEach(AbilitàInUso::azzera);
     }
 
     public void svuota() {
