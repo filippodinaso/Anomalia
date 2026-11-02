@@ -1,8 +1,10 @@
-package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore;
+package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.effetti;
 
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.ContestoEffetto;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Effetto;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Combattente;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Statistica;
 
 public final class ModificaStatistica implements Effetto {
 
