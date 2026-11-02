@@ -24,7 +24,6 @@ protected Combattente(String nome, int integritaMassima){
 }
 
 //Metodi
-
     public RisultatoDanno subisciDanni(int danno) {
         int daAssorbire = Math.max(0, danno); // il danno non può essere negativo
         int assorbito = Math.min(scudo, daAssorbire); // quanto danno incassa lo scudo
@@ -34,7 +33,6 @@ protected Combattente(String nome, int integritaMassima){
         return new RisultatoDanno(subito, assorbito);
     }
 
-    
     public int ripristinaIntegrita(int quantita) {
     
      if (quantita<=0){return 0;}
@@ -62,7 +60,6 @@ protected Combattente(String nome, int integritaMassima){
         scudo += Math.max(0, quantita); //l'aggiunta allo scudo non può essere negativa
     }
 
-
     public void azzeraScudo() {
         scudo = 0;
     }
@@ -76,13 +73,8 @@ protected Combattente(String nome, int integritaMassima){
         this.scudo = 0;
     }
 
-
     public boolean isSconfitto() {
         return integrita == 0;
-    }
-
-    public int bonusDanni() {
-        return 0;
     }
 
     //Getter

@@ -9,7 +9,7 @@ import java.util.List;
 //Definizione abilità
 public record Abilità(String id, String nome, int costoCpu, int ricarica, Bersaglio bersaglio, List<Effetto> effetti) {
    
- public Abilità{
+public Abilità{
     
     if(id == null || id.isBlank() || nome==null || nome.isBlank())
         throw new IllegalArgumentException("Id e nome sono obbligatori");
@@ -25,7 +25,7 @@ public record Abilità(String id, String nome, int costoCpu, int ricarica, Bersa
  }
  
  
-    public String descrizione() {
+public String descrizione() {
 
     List<String> descrizioneAbilità = new ArrayList<>();
 

@@ -17,12 +17,11 @@ public final class Cpu {
 
     this.massima=massima;
     this.rigenerazione=rigenerazione;
-    this.corrente=massima;
+    this.corrente=corrente;
 }
 
-    //salvataggi
     public static Cpu ripristinata(int massima, int corrente, int rigenerazione) {
-        return new Cpu(massima, corrente, rigenerazione);
+        return new Cpu(massima, massima, rigenerazione);
 }
 
 
@@ -41,7 +40,6 @@ public final class Cpu {
     return true;
 
 }
-
 
     //ritorna i punti tolti (contro il giocatore)
     public int brucia(int quantita) {
@@ -69,7 +67,7 @@ public final class Cpu {
     corrente = massima;
  }
 
-     public void aumentaMassima(int quantita) {
+    public void aumentaMassima(int quantita) {
         int incremento = Math.max(0, quantita);
         massima += incremento;
         corrente += incremento;

@@ -17,4 +17,3 @@ public record DefinizioneNemico(String id, String nome, Scaling integrita, Scali
         return new Nemico(nome, livello, integrita.valore(livello), frammentiDati.valore(livello), comportamento.crea(livello));
     }
 }
-

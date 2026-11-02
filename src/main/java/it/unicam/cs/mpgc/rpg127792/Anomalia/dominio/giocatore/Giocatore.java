@@ -13,17 +13,15 @@ import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaI
 
 
 //Personaggio controllato dall'utente (daInserireNome)
-
 public class Giocatore extends Combattente {
 
     //RICORDA CAMBIA NOME !!!!!!!!!!
-public static final String NOME="DaInserire";    
+public static final String NOME="DaInserire";
 
 private final Cpu cpu;
-private int rigenerazioneIntegrita;
-private int danniExtra;
 private final Arsenale arsenale;
 private final List<Abilità> arsenaleIniziale;
+private final BonusGiocatore bonus;
 
 
     public Giocatore(List<Abilità> arsenaleIniziale) {
@@ -33,6 +31,7 @@ private final List<Abilità> arsenaleIniziale;
         this.arsenale= new Arsenale(DIMENSIONE_DECK);
         this.arsenaleIniziale=List.copyOf(arsenaleIniziale);
         this.arsenale.inizializza(arsenaleIniziale);
+        this.bonus= new BonusGiocatore();
     }
 
     //rigenerazioni inizio scontro
@@ -47,7 +46,7 @@ private final List<Abilità> arsenaleIniziale;
         if(numeroTurno>1)
              arsenale.avanzaRicariche();
      
-        ripristinaIntegrita(rigenerazioneIntegrita);
+        ripristinaIntegrita(bonus.getRigenerazioneIntegrita());
         cpu.rigenera();
     }
 
@@ -57,28 +56,8 @@ private final List<Abilità> arsenaleIniziale;
         cpu.ripristina();
     }
 
-
-
-     @Override
-    public int bonusDanni() {
-        return danniExtra;
-    }
-
-    //Aumenta statistiche
-
-        public void modifica(Statistica statistica, int valore) {
-        switch (statistica) {
-            case INTEGRITA_MASSIMA -> aumentaIntegritaMassima(valore);
-            case CPU_MASSIMA -> cpu.aumentaMassima(valore);
-            case RIGENERAZIONE_CPU -> cpu.aumentaRigenerazione(valore);
-            case RIGENERAZIONE_INTEGRITA -> rigenerazioneIntegrita += valore;
-            case DANNI_EXTRA -> danniExtra += valore;
-        }
-    }
-
-
-        public Cpu getCpu() { return cpu; }
-        public int getRigenerazioneIntegrita() { return rigenerazioneIntegrita; }
+    public Cpu getCpu() { return cpu; }
+    public BonusGiocatore getBonus() { return bonus; }
 }
 
 
