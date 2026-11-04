@@ -8,7 +8,9 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Combattente;
 //Usiamo un interfaccia per distingure bersaglio singolo, multiplo e giocatore (per eventuali abilità di difesa) 
 public interface Bersaglio {
 
-     List<Combattente> seleziona(Combattente scelto, Combattente esecutore, List<Combattente> nemici);
+     boolean richiedeScelta();
+
+     List<Combattente> seleziona(Combattente scelto, Combattente esecutore, List<? extends Combattente> nemici);
 
      String descrizione();
 

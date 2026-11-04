@@ -8,7 +8,6 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.ContestoEffetto;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Combattente;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Cpu;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.Pubblicatore;
-
 import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.AUMENTA_INTEGRITA_PERLIVELLO;
 import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.CPU_INIZIALE;
 import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.DIMENSIONE_DECK;
@@ -25,7 +24,7 @@ public static final String NOME="DaInserire";
 private final Cpu cpu;
 private final Arsenale arsenale;
 private final Progressione progressione = new Progressione();
-private final List<Abilità> arsenaleIniziale;
+private final List<Abilità> arsenaleIniziale; //TODO
 private final BonusGiocatore bonus;
 
 
