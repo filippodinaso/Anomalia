@@ -1,5 +1,7 @@
 package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore;
 
+import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.LIVELLO_INIZIALE;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -14,7 +16,7 @@ public final class Progressione {
 
 //Costruttore da 0
 public Progressione(){
-this.livelloAnomalia=1;
+this.livelloAnomalia=LIVELLO_INIZIALE;
 this.frammentiDati=0;
 }
 

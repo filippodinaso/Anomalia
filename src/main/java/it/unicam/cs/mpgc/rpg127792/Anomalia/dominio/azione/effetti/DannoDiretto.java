@@ -5,7 +5,6 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Effetto;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Combattente;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.RisultatoDanno;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.EventoDiGioco.DannoInflitto;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
 
 
 public final class DannoDiretto implements Effetto {
@@ -26,14 +25,15 @@ public final class DannoDiretto implements Effetto {
         return new DannoDiretto(danno, true);
     }
 
+    // solo danno senza bonus (per implementazioni future (costo di una scelta))
+    public static DannoDiretto fisso(int danno) {
+        return new DannoDiretto(danno, false);
+    }
+
     @Override
     public void applica(ContestoEffetto contesto) {
-        int bonus = 0;
-
-        if (conBonus && contesto.esecutore() instanceof Giocatore giocatore) {
-            bonus = giocatore.getBonus().getDanniExtra();
-        }
-
+       
+        int bonus = conBonus ? contesto.esecutore().getDanniExtra() : 0;
         int totale = danno + bonus;
 
         for (Combattente bersaglio : contesto.bersagli()) {

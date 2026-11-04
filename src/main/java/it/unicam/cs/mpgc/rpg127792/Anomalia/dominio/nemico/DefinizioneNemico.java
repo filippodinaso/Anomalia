@@ -7,7 +7,7 @@ public record DefinizioneNemico(String id, String nome, Scaling integrita, Scali
             throw new IllegalArgumentException("Id e nome sono obbligatori");
         
         if (integrita == null || frammentiDati == null || comportamento == null) 
-            throw new NullPointerException("L'integrità, i frammentiDati e il comportamento non possono essere null.");
+            throw new IllegalArgumentException("L'integrità, i frammentiDati e il comportamento non possono essere null.");
     }    
 
     //creiamo un'istanza nel nemico tenendo conto del livello del giocatore e del rango del nemico

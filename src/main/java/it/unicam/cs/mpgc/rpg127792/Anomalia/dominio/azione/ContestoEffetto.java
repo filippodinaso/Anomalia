@@ -13,11 +13,11 @@ public record ContestoEffetto(Combattente esecutore, List<Combattente> bersagli,
 public ContestoEffetto{
 
     if (esecutore==null) 
-        throw new NullPointerException("L'esecutore non può essere nullo.");
+        throw new IllegalArgumentException("L'esecutore non può essere nullo.");
     
 
     if (eventi == null)
-        throw new NullPointerException("Il pubblicatore non può essere nullo.");
+        throw new IllegalArgumentException("Il pubblicatore non può essere nullo.");
 
 
     //Copiamo lista bersagli per averne una immutabile garantendo il contesto

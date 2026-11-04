@@ -11,10 +11,10 @@ public record Talento(String id, Ramo ramo, String nome, String descrizione, Lis
             throw new IllegalArgumentException("Id e nome sono obbligatori");
         
         if (ramo == null) 
-            throw new NullPointerException("Il ramo non può essere nullo");
+            throw new IllegalArgumentException("Il ramo non può essere nullo");
         
         if (descrizione == null) 
-            throw new NullPointerException("La descrizione non può essere nulla");
+            throw new IllegalArgumentException("La descrizione non può essere nulla");
         
         if (effetti == null || effetti.isEmpty()) 
             throw new IllegalArgumentException("Un talento deve avere almeno un effetto");

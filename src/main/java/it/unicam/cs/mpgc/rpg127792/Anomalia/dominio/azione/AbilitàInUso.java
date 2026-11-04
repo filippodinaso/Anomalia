@@ -23,9 +23,10 @@ public final class AbilitàInUso {
    }
 
    public void avanzaTurno(){
+   if (ricaricaRimanente>0)
     ricaricaRimanente--;
    }
-
+   
    public void azzera(){
     ricaricaRimanente=0;
    }

@@ -16,7 +16,7 @@ protected Combattente(String nome, int integritaMassima){
     if(integritaMassima <= 0)
         throw new IllegalArgumentException("L'integrità massima non può essere 0 o minore.");
     if(nome == null)
-        throw new NullPointerException("Il nome non può essere nullo.");
+        throw new IllegalArgumentException("Il nome non può essere nullo.");
     
     this.nome=nome;
     this.integritaMassima=integritaMassima;
@@ -75,6 +75,10 @@ protected Combattente(String nome, int integritaMassima){
 
     public boolean isSconfitto() {
         return integrita == 0;
+    }
+
+    public int getDanniExtra(){
+        return 0;
     }
 
     //Getter

@@ -5,7 +5,9 @@ public final class StatisticaIniziale{
     public static final int INTEGRITA_INIZIALE = 100;
     public static final int CPU_INIZIALE = 10;
     public static final int RIGENERAZIONE_CPU_INIZIALE = 2;
-    public static final int DIMENSIONE_DECK=4;
+    public static final int DIMENSIONE_DECK= 4;
+    public static final int LIVELLO_INIZIALE= 1;
+    public static final int AUMENTA_INTEGRITA_PERLIVELLO= 20;
 
     private StatisticaIniziale() {
     }
