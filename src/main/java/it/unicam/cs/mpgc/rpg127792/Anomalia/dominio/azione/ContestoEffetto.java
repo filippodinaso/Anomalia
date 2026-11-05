@@ -14,11 +14,12 @@ public ContestoEffetto{
 
     if (esecutore==null) 
         throw new IllegalArgumentException("L'esecutore non può essere nullo.");
-    
 
     if (eventi == null)
         throw new IllegalArgumentException("Il pubblicatore non può essere nullo.");
 
+    if (bersagli==null)
+        throw new IllegalArgumentException("La lista dei bersagli non può essere vuota.");
 
     //Copiamo lista bersagli per averne una immutabile garantendo il contesto
     bersagli = List.copyOf(bersagli);

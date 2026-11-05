@@ -28,6 +28,7 @@ public sealed interface EventoDiGioco {
     // ---Stato Entità---
     record NemicoSconfitto(String nemico) implements EventoDiGioco { }
     record GiocatoreSconfitto(String nome) implements EventoDiGioco { }    
-
+    record ProcessoInnocuoGestito(String processo, boolean assorbito, String riepilogo) implements EventoDiGioco { }
+    record ProcessoInnocuoDecaduto(String processo) implements EventoDiGioco { }
    
 }
