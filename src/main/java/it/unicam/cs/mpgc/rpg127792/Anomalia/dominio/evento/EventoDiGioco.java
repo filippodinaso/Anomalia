@@ -13,8 +13,7 @@ public sealed interface EventoDiGioco {
     record ScontroVinto() implements EventoDiGioco { }
     
     //Combattente.subisciDanni
-    record DannoInflitto(String sorgente, String bersaglio, int integritaPersa, int scudoAssorbito)
-            implements EventoDiGioco { }
+    record DannoInflitto(String sorgente, String bersaglio, int integritaPersa, int scudoAssorbito) implements EventoDiGioco { }
 
     //Combattente.ripristinaIntegrità
     record IntegritaRipristinata(String bersaglio, int quantita) implements EventoDiGioco { }
@@ -26,7 +25,7 @@ public sealed interface EventoDiGioco {
     record CpuBruciata(String bersaglio, int quantita) implements EventoDiGioco { }
 
     // ---Stato Entità---
-    record NemicoSconfitto(String nemico) implements EventoDiGioco { }
+    record NemicoSconfitto(String nemico, int frammentiDati) implements EventoDiGioco { }
     record GiocatoreSconfitto(String nome) implements EventoDiGioco { }    
     record ProcessoInnocuoGestito(String processo, boolean assorbito, String riepilogo) implements EventoDiGioco { }
     record ProcessoInnocuoDecaduto(String processo) implements EventoDiGioco { }
