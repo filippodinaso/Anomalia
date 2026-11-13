@@ -1,6 +1,8 @@
 package it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri;
 
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.innocuo.DefinizioneInnocuo;
 
-class RegistroInnocui {
+public interface RegistroInnocui {
 
+    DefinizioneInnocuo get(String id);
 }

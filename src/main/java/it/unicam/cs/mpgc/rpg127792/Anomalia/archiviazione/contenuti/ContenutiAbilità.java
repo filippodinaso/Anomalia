@@ -24,7 +24,7 @@ public final class ContenutiAbilità implements RegistroAbilità {
     public static final String FIREWALL_REATTIVO = "firewall_reattivo";
 
     private final List<Abilità> arsenaleIniziale;
-    private final Map<String, Abilità> perId = new LinkedHashMap<>();
+    private final Map<String, Abilità> abilitàPerId = new LinkedHashMap<>();
 
     public ContenutiAbilità() {
 
@@ -43,12 +43,20 @@ public final class ContenutiAbilità implements RegistroAbilità {
                 new BersaglioEsecutore(), List.of(new CuraDiretta(30))));
 
 
-        arsenaleIniziale.forEach(a -> perId.put(a.id(), a));
+        arsenaleIniziale.forEach(abilità -> abilitàPerId.put(abilità.id(), abilità));
     }
 
     @Override
     public List<Abilità> getArsenaleIniziale() {
         return arsenaleIniziale;
+    }
+
+    @Override
+    public Abilità get(String id) {
+        if (!abilitàPerId.containsKey(id)) {
+            throw new IllegalArgumentException("Abilità sconosciuta: " + id);
+        }
+        return abilitàPerId.get(id);
     }
 }
 

@@ -8,4 +8,5 @@ public interface RegistroAbilità {
 
     List<Abilità> getArsenaleIniziale();
     
+    Abilità get(String id);
 }
