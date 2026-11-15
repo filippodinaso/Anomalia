@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Effetto;
 
+//potenziamenti permanenti del giocatore
 public record Talento(String id, Ramo ramo, String nome, String descrizione, List<Effetto> effetti) {
 
     public Talento {

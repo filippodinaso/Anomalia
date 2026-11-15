@@ -25,7 +25,7 @@ public final class DannoDiretto implements Effetto {
         return new DannoDiretto(danno, true);
     }
 
-    // solo danno senza bonus (per implementazioni future (costo di una scelta))  --> TODO
+    // solo danno senza bonus (per implementazioni future (costo di una scelta))
     public static DannoDiretto fisso(int danno) {
         return new DannoDiretto(danno, false);
     }
