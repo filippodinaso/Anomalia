@@ -6,8 +6,8 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Talento;
 
 public interface RegistroTalenti {
     
-       List<Talento> getTutti();
+    List<Talento> getTutti();
 
-       Talento get(String id);
+    Talento get(String id);
 
 }

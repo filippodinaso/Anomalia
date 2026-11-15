@@ -80,7 +80,7 @@ private final BonusGiocatore bonus;
 
     @Override
     public int getDanniExtra() { return bonus.getDanniExtra(); }
-
+    public Arsenale getArsenale() { return arsenale; }
     public Cpu getCpu() { return cpu; }
     public BonusGiocatore getBonus() { return bonus; }
     public Progressione getProgressione() { return  progressione;   }
