@@ -59,8 +59,4 @@ public final class ContenutiNemici implements RegistroNemici {
         return nemiciPerId.get(id);
     }
 
-    @Override
-    public DefinizioneNemico getPunitivoPerDecadimentoInnocuo() {
-        return get(ZOMBIE_PROCESS);
-    }
 }

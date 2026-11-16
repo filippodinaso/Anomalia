@@ -8,6 +8,4 @@ public interface RegistroNemici {
 
     DefinizioneNemico get(String id);
 
-    // Il nemico generato quando un processo innocuo decade. 
-    DefinizioneNemico getPunitivoPerDecadimentoInnocuo();
 }

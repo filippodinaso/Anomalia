@@ -27,15 +27,15 @@ public final class ContenutiInnocui implements RegistroInnocui {
     public ContenutiInnocui() {
         
         List.of(
-                new DefinizioneInnocuo(CACHE_DATI, "Cache_Dati", 3,
+                new DefinizioneInnocuo(CACHE_DATI, "Cache_Dati", 3, ContenutiNemici.ZOMBIE_PROCESS,
                 List.of(new ModificaDati(20)),  
                 List.of(new ModificaDati(50), DannoDiretto.fisso(10))), //Usiamo danno senza bonus
                
-                new DefinizioneInnocuo(NODO_RIPARAZIONE, "Nodo_Riparazione", 3,
+                new DefinizioneInnocuo(NODO_RIPARAZIONE, "Nodo_Riparazione", 3, ContenutiNemici.ZOMBIE_PROCESS,
                 List.of(new CuraDiretta(30)),
                 List.of(new ModificaStatistica(Statistica.CPU_MASSIMA, 15), DannoDiretto.fisso(15))),
 
-                new DefinizioneInnocuo(CORE_SOVRACCARICO, "Core_Sovraccarico", 2,
+                new DefinizioneInnocuo(CORE_SOVRACCARICO, "Core_Sovraccarico", 2, ContenutiNemici.ZOMBIE_PROCESS,
                 List.of(new ModificaStatistica(Statistica.CPU_MASSIMA, 5)),
                 List.of(new ModificaDati(100), 
                         new CuraDiretta(50), 

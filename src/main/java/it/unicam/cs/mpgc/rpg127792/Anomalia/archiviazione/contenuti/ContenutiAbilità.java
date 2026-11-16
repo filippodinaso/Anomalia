@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Abilità;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.CatalogoAbilità;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.bersagli.BersaglioArea;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.bersagli.BersaglioEsecutore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.bersagli.BersaglioSingolo;
@@ -24,6 +25,7 @@ public final class ContenutiAbilità implements RegistroAbilità {
     public static final String FIREWALL_REATTIVO = "firewall_reattivo";
 
     private final List<Abilità> arsenaleIniziale;
+    private final List<CatalogoAbilità> catalogoNegozio;
     private final Map<String, Abilità> abilitàPerId = new LinkedHashMap<>();
 
     public ContenutiAbilità() {
@@ -43,12 +45,25 @@ public final class ContenutiAbilità implements RegistroAbilità {
                 new BersaglioEsecutore(), List.of(new CuraDiretta(30))));
 
 
+    catalogoNegozio = List.of(
+                new CatalogoAbilità(new Abilità(BUFFER_OVERFLOW, "Buffer_Overflow", 5, 3,
+                new BersaglioSingolo(), List.of(DannoDiretto.attacco(45))), 150),
+
+                new CatalogoAbilità(new Abilità(FIREWALL_REATTIVO, "Firewall_Reattivo", 2, 1,
+                new BersaglioEsecutore(), List.of(new ScudoDiretto(10))), 100));
+
         arsenaleIniziale.forEach(abilità -> abilitàPerId.put(abilità.id(), abilità));
+        catalogoNegozio.forEach(voce -> abilitàPerId.put(voce.abilità().id(), voce.abilità()));
     }
 
     @Override
     public List<Abilità> getArsenaleIniziale() {
         return arsenaleIniziale;
+    }
+
+    @Override
+    public List<CatalogoAbilità> getCatalogoNegozio() {
+        return catalogoNegozio;
     }
 
     @Override

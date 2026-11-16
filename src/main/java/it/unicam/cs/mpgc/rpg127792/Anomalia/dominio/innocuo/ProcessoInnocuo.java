@@ -9,6 +9,7 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.EventoDiGioco;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.EventoDiGioco.ProcessoInnocuoGestito;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.Pubblicatore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Nemico;
 
 //Un processo innocuo sarà un processo che non attaccherà il giocatore ma che lo metterà di fronte ad una scelta (Assorbi o Elimina)
 //tale scelta definirà quali delle due liste effetti sarà applicata sul player
@@ -17,17 +18,22 @@ public final class ProcessoInnocuo {
 
     private final String nome;
     private int turniRimanenti;
+    private final Nemico nemicoAlDecadimento;
     private boolean gestito;
     private final List<Effetto> effettiAssorbi;
     private final List<Effetto> effettiElimina;
 
 
-    public ProcessoInnocuo(String nome, int turniAlDecadimento, List<Effetto> effettiAssorbi, List<Effetto> effettiElimina) {
-        if (turniAlDecadimento <= 0) {
+    public ProcessoInnocuo(String nome, int turniAlDecadimento, Nemico nemicoAlDecadimento, List<Effetto> effettiAssorbi, List<Effetto> effettiElimina) {
+        if (turniAlDecadimento <= 0) 
             throw new IllegalArgumentException("Il processo deve durare almeno un turno");
-        }
+        
+        if (nemicoAlDecadimento == null) 
+            throw new IllegalArgumentException("Il nemico al decadimento non può essere nullo");
+        
         this.nome = nome;
         this.turniRimanenti = turniAlDecadimento;
+        this.nemicoAlDecadimento = nemicoAlDecadimento;
         this.effettiAssorbi = List.copyOf(effettiAssorbi);
         this.effettiElimina = List.copyOf(effettiElimina);
     }
@@ -67,6 +73,7 @@ public final class ProcessoInnocuo {
 
     public String getNome() { return nome; }
     public int getTurniRimanenti() { return turniRimanenti; }
+    public Nemico getNemicoAlDecadimento() { return nemicoAlDecadimento; }
     public boolean isGestito() { return gestito; }
 }
 

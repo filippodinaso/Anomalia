@@ -6,7 +6,7 @@ import java.util.List;
 //TODO
 public class NodoBoss extends NodoCombattimento {
 
-    public NodoBoss(String id, String descrizione, List<String> idNemici, List<String> idInnocui) {
-        super(id, descrizione, idNemici, idInnocui);
+    public NodoBoss(String id, String descrizione, int rango, List<String> idNemici, List<String> idInnocui) {
+        super(id, descrizione, rango, idNemici, idInnocui);
     }
 }

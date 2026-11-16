@@ -8,6 +8,8 @@ public sealed interface EventoDiGioco {
 
     record TurnoGiocatoreIniziato(int numero) implements EventoDiGioco { }
 
+    record AbilitàUsata(String giocatore, String abilità) implements EventoDiGioco{}
+
     record TurnoNemiciIniziato() implements EventoDiGioco { }
 
     record ScontroVinto() implements EventoDiGioco { }
@@ -25,6 +27,8 @@ public sealed interface EventoDiGioco {
 
     //Cpu.brucia
     record CpuBruciata(String bersaglio, int quantita) implements EventoDiGioco { }
+
+
 
     // ---Stato Entità---
     record NemicoSconfitto(String nemico, int frammentiDati) implements EventoDiGioco { }
