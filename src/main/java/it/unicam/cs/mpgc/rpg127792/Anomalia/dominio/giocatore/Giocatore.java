@@ -24,7 +24,7 @@ public static final String NOME="DaInserire";
 private final Cpu cpu;
 private final Arsenale arsenale;
 private final Progressione progressione = new Progressione();
-private final List<Abilità> arsenaleIniziale; //TODO
+private final List<Abilità> arsenaleIniziale;
 private final BonusGiocatore bonus;
 
 
@@ -59,6 +59,8 @@ private final BonusGiocatore bonus;
         ripristinaIntegrita(getIntegritaMassima());
         azzeraScudo();
         cpu.ripristina();
+        arsenale.svuota();   //le abilità dovranno essere riacquistate, ciò che farà aumentare di livello il giocatore sono i talenti e l'anomalia
+        arsenale.inizializza(arsenaleIniziale);
     }
 
     public void aumentaAnomalia() {
