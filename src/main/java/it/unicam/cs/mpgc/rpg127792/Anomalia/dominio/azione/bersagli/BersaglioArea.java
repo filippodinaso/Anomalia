@@ -30,6 +30,6 @@ public class BersaglioArea implements Bersaglio  {
 
     @Override
     public String descrizione(){
-        return "TODO";
+        return "fino a un massimo di " + massimo + " nemici";
     }
 }

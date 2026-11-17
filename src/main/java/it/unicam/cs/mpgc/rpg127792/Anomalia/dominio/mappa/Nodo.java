@@ -1,5 +1,7 @@
 package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa;
 
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
+
 public abstract class Nodo {
 
     private final String id;
@@ -25,4 +27,7 @@ public abstract class Nodo {
 
     public String getId() { return id; }
     public String getDescrizione() { return descrizione; }
+
+    public void allIngresso(Giocatore giocatore) {
+    }
 }
