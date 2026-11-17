@@ -1,0 +1,44 @@
+/* Il tema del gioco sarà stile terminale*/
+
+.root {
+    -fx-background-color: #0a0a0a;
+    -fx-font-family: "Consolas", "Monospaced";
+    -fx-font-size: 14px;
+}
+
+.label {
+    -fx-text-fill: #00ff00;
+}
+
+.titolo {
+    -fx-text-fill: #00ff00;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}
+
+.sottotitolo {
+    -fx-text-fill: #8be9fd;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Pulsanti */
+.button {
+    -fx-background-color: #11111a;
+    -fx-text-fill: #00ff00;
+    -fx-border-color: #00ff00;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #00ff00;
+    -fx-text-fill: #0a0a0a;
+}
+
+.button:disabled {
+    -fx-opacity: 0.35;
+}
+

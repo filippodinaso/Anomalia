@@ -31,13 +31,9 @@ public final class RepositoryPartiteJson implements RepositoryPartite {
 
     @Override
     public void salva(StatoPartita stato) {
-        File cartella = file.getParentFile();
-        if (cartella != null) 
-            cartella.mkdirs();
-        
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+      try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             gson.toJson(stato, writer);
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
             throw new IllegalStateException("Impossibile salvare la partita in " + file, e);
         }
     }
@@ -46,15 +42,14 @@ public final class RepositoryPartiteJson implements RepositoryPartite {
     public StatoPartita carica() {
         if (!esiste()) 
             throw new IllegalStateException("Non esiste alcun salvataggio in " + file);
-        
+        StatoPartita stato;
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            StatoPartita stato = gson.fromJson(reader, StatoPartita.class);
-            if (stato == null || stato.giocatore() == null || stato.capitolo() == null) {
-                throw new IllegalStateException("Il salvataggio in " + file + " è vuoto o incompleto");
-            }
-            return stato;
+            stato = gson.fromJson(reader, StatoPartita.class);
         } catch (IOException | RuntimeException e) {
             throw new IllegalStateException("Il salvataggio in " + file + " non è leggibile o non è valido", e);
         }
+          if (stato == null || stato.giocatore() == null || stato.capitolo() == null) 
+                throw new IllegalStateException("Il salvataggio in " + file + " è vuoto o incompleto");
+       return stato;  
     }
 }
