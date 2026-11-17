@@ -100,17 +100,17 @@ public final class MappaCapitolo {
         private final Map<String, List<String>> archi = new LinkedHashMap<>();
 
         private Costruttore(String id, String nome) {
-            if (id == null || id.isBlank() || nome == null || nome.isBlank()) {
+            if (id == null || id.isBlank() || nome == null || nome.isBlank()) 
                 throw new IllegalArgumentException("Id e nome del capitolo sono obbligatori");
-            }
+            
             this.id = id;
             this.nome = nome;
         }
 
         public Costruttore nodo(Nodo nodo) {
-            if (nodi.containsKey(nodo.getId())) {
+            if (nodi.containsKey(nodo.getId())) 
                 throw new IllegalArgumentException("Nodo duplicato: " + nodo.getId());
-            }
+            
             nodi.put(nodo.getId(), nodo);
             return this;
         }
@@ -122,18 +122,18 @@ public final class MappaCapitolo {
 
         //collega due nodi (da -> a)
         public Costruttore arco(String da, String a) {
-            if (!archi.containsKey(da)) {
+            if (!archi.containsKey(da)) 
                 archi.put(da, new ArrayList<>());
-            }
+            
             archi.get(da).add(a);
             return this;
         }
 
         //controlla che il grafo sia valido prima di creare la mappa
         public MappaCapitolo crea() {
-            if (idPartenza == null || !nodi.containsKey(idPartenza)) {
+            if (idPartenza == null || !nodi.containsKey(idPartenza)) 
                 throw new IllegalStateException("Nodo di partenza mancante o sconosciuto");
-            }
+            
 
             archi.forEach((da, destinazioni) -> {
                 if (!nodi.containsKey(da) || !nodi.keySet().containsAll(destinazioni)) {
@@ -143,9 +143,9 @@ public final class MappaCapitolo {
 
             MappaCapitolo mappa = new MappaCapitolo(this);
             //controlliamo che non ci siano nodi isolati non raggiungibili dalla partenza
-            if (mappa.getNodi().size() != nodi.size()) {
+            if (mappa.getNodi().size() != nodi.size()) 
                 throw new IllegalStateException("Ci sono nodi non raggiungibili dalla partenza");
-            }
+            
             return mappa;
         }
     }

@@ -29,6 +29,5 @@ public abstract class Nodo {
     public String getDescrizione() { return descrizione; }
 
     public void allIngresso(Giocatore giocatore) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

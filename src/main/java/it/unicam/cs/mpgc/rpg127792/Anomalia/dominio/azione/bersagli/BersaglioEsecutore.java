@@ -19,7 +19,7 @@ public class BersaglioEsecutore implements Bersaglio  {
 
     @Override
     public String descrizione() {
-        return "TODO";
+        return "se stesso";
     }
 }
 

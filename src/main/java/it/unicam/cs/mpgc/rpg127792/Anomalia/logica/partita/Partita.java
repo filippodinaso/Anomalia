@@ -32,7 +32,8 @@ public final class Partita {
 
     //Ricostruisce la partita salvata
     public static Partita carica(RegistroCapitoli capitoli, RegistroAbilità abilità, RepositoryPartite repository) {
-        StatoPartita stato = repository.carica();
+        try {
+            StatoPartita stato = repository.carica();
             IstantaneaGiocatore foto = stato.giocatore();
 
             //il registro trasforma gli id salvati in abilità che poi vengono passati a ricostruisci in IstantaneaGiocatore
@@ -43,7 +44,10 @@ public final class Partita {
             AvanzamentoCapitolo avanzamento = new AvanzamentoCapitolo(capitoli.crea(stato.capitolo().idCapitolo()));
             avanzamento.ripristina(stato.capitolo());
             return new Partita(giocatore, avanzamento, capitoli, repository);
-        
+        } 
+         catch (IllegalArgumentException e) {
+            throw new IllegalStateException("Il salvataggio non è coerente con il gioco: " + e.getMessage(), e);
+        }
     }
 
     //Sposta il giocatore nel nodo, se accessibile, e fa scattare l'effetto d'ingresso del nodo.

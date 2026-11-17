@@ -23,6 +23,6 @@ public class BersaglioSingolo implements Bersaglio {
 
     @Override
     public String descrizione() {
-        return "TODO";
+        return "un nemico";
     }
 }

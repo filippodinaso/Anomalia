@@ -9,16 +9,19 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Nemico;
 public record DefinizioneInnocuo(String id, String nome, int turniAlDecadimento, String idNemicoDecaduto, List<Effetto> effettiAssorbi, List<Effetto> effettiElimina) {
 
     public DefinizioneInnocuo {
-        //Ammettiamo una lista vuota per ora (TODO)
+      
         if (id == null || id.isBlank() || nome == null || nome.isBlank()) 
             throw new IllegalArgumentException("Id e nome sono obbligatori");
 
-        if (idNemicoDecaduto == null)
+        if (idNemicoDecaduto == null || idNemicoDecaduto.isBlank())
             throw new IllegalArgumentException("Il nemico generato al decadimento è obbligatorio");
 
         if(turniAlDecadimento<1)
             throw new IllegalArgumentException("L'entità deve esistere almeno per un turno.");
         
+        if (effettiAssorbi == null || effettiAssorbi.isEmpty() || effettiElimina == null || effettiElimina.isEmpty())
+            throw new IllegalArgumentException("Le scelte devono avere almeno un effetto.");
+
         effettiAssorbi = List.copyOf(effettiAssorbi);
         effettiElimina = List.copyOf(effettiElimina);
     }

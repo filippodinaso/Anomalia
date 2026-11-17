@@ -18,8 +18,8 @@ import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaI
 //Personaggio controllato dall'utente 
 public class Giocatore extends Combattente {
 
-//TODO
-public static final String NOME="DaInserire";
+
+public static final String NOME="Soggetto_Zero";
 
 private final Cpu cpu;
 private final Arsenale arsenale;
