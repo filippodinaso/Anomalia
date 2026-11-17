@@ -30,6 +30,21 @@ public final class RegistroCapitoli {
         return definizione.crea();
     }
 
+    public boolean haSuccessivo(String idCapitolo) {
+        List<String> ids = new ArrayList<>(definizioni.keySet());
+        int posizione = ids.indexOf(idCapitolo);
+        return posizione >= 0 && posizione < ids.size() - 1;
+    }
+
+    public String getIdSuccessivo(String idCapitolo) {
+        
+        if (!haSuccessivo(idCapitolo)) 
+            throw new IllegalArgumentException("Nessun capitolo dopo: " + idCapitolo);
+        
+        List<String> ids = new ArrayList<>(definizioni.keySet());
+        return ids.get(ids.indexOf(idCapitolo) + 1);
+    }
+
     //costruisce la mappa del primo capitolo registrato
     public MappaCapitolo creaPrimo() {
         

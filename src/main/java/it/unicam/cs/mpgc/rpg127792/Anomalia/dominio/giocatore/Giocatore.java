@@ -23,21 +23,28 @@ public static final String NOME="DaInserire";
 
 private final Cpu cpu;
 private final Arsenale arsenale;
-private final Progressione progressione = new Progressione();
+private final Progressione progressione;
 private final List<Abilità> arsenaleIniziale;
 private final BonusGiocatore bonus;
 
 
-    public Giocatore(List<Abilità> arsenaleIniziale) {
-        super(NOME, INTEGRITA_INIZIALE);
-        this.cpu = new Cpu(CPU_INIZIALE, RIGENERAZIONE_CPU_INIZIALE);
-       
-        this.arsenale= new Arsenale(DIMENSIONE_DECK);
-        this.arsenaleIniziale=List.copyOf(arsenaleIniziale);
-        this.arsenale.inizializza(arsenaleIniziale);
-
-        this.bonus= new BonusGiocatore();
+public Giocatore(List<Abilità> arsenaleIniziale) {
+        this(arsenaleIniziale, new Cpu(CPU_INIZIALE, RIGENERAZIONE_CPU_INIZIALE), new Progressione(), new BonusGiocatore(), INTEGRITA_INIZIALE, INTEGRITA_INIZIALE);
     }
+
+    //Assembla il giocatore da componenti già pronte
+    Giocatore(List<Abilità> arsenaleIniziale, Cpu cpu, Progressione progressione, BonusGiocatore bonus,
+              int integritaMassima, int integrita) {
+        super(NOME, integritaMassima);
+        ripristinaStato(integritaMassima, integrita);
+        this.cpu = cpu;
+        this.progressione = progressione;
+        this.bonus = bonus;
+        this.arsenaleIniziale = List.copyOf(arsenaleIniziale);
+        this.arsenale = new Arsenale(DIMENSIONE_DECK);
+        this.arsenale.inizializza(arsenaleIniziale);
+    }
+
 
     //rigenerazioni inizio scontro
     public void iniziaScontro() {
