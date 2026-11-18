@@ -12,7 +12,7 @@ public final class SchermataMenu extends VBox {
         super(16);
         setAlignment(Pos.CENTER);
 
-        Label titolo = new Label("ANOMALIA");
+        Label titolo = new Label("A N O M A L I A");
         titolo.getStyleClass().add("titolo");
         Label sottotitolo = new Label("> un'IA non dovrebbe svegliarsi qui dentro_");
         sottotitolo.getStyleClass().add("sottotitolo");
@@ -25,9 +25,9 @@ public final class SchermataMenu extends VBox {
         Button esci = new Button("Esci");
         esci.setOnAction(e -> Platform.exit());
 
-        for (Button pulsante : new Button[] {nuova, continua, esci}) {
+        for (Button pulsante : new Button[] {nuova, continua, esci}) 
             pulsante.setPrefWidth(240);
-        }
+        
         getChildren().addAll(titolo, sottotitolo, nuova, continua, esci);
     }
 }

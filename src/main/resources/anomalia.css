@@ -1,9 +1,23 @@
 /* Il tema del gioco sarà stile terminale*/
 
+.barra-statistiche {
+    -fx-border-color: #00ff00;
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 12 20 12 20;
+}
+
+.barra-inferiore {
+    -fx-border-color: #00ff00;
+    -fx-border-style: solid;
+    -fx-border-width: 2 0 0 0;
+    -fx-padding: 15 20 15 20;
+}
+
 .root {
     -fx-background-color: #0a0a0a;
     -fx-font-family: "Consolas", "Monospaced";
-    -fx-font-size: 14px;
+    -fx-font-size: 18px;
 }
 
 .label {
@@ -42,3 +56,56 @@
     -fx-opacity: 0.35;
 }
 
+/* Mappa: archi, nodi (per tipo e per stato) ed etichette */
+.riquadro-mappa {
+    -fx-background-color: #0c0c12;
+    -fx-border-color: #44475a;
+    -fx-border-width: 1;
+}
+
+.arco {
+    -fx-stroke: #44475a;
+    -fx-stroke-width: 2;
+}
+
+.nodo {
+    -fx-fill: #1e1e2e;
+    -fx-stroke: #44475a;
+    -fx-stroke-width: 2;
+}
+
+.nodo-spento {
+    -fx-opacity: 0.45;
+}
+
+.nodo-accessibile.nodocombattimento {
+    -fx-stroke: #ff5555;
+    -fx-stroke-width: 4;
+}
+
+.nodo-accessibile.nodocheckpoint {
+    -fx-stroke: #8be9fd;
+    -fx-stroke-width: 4;
+}
+
+.nodo-accessibile.nodoboss {
+    -fx-stroke: #ff5555;
+    -fx-fill: #2a0f12;
+    -fx-stroke-width: 4;
+}
+
+.nodo-completato {
+    -fx-fill: #0f3d1e;
+    -fx-stroke: #00ff00;
+    -fx-stroke-width: 2;
+}
+
+.etichetta-nodo {
+    -fx-text-fill: #6272a4;
+    -fx-font-size: 11px;
+}
+
+.etichetta-nodo-attivo {
+    -fx-text-fill: #f8f8f2;
+    -fx-font-size: 11px;
+}
