@@ -22,8 +22,8 @@ import javafx.scene.shape.Line;
 //pannello grafico che disegna i nodi e i collegamenti della mappa del capitolo
 public final class MappaView extends Pane {
 
-    private static final double LARGHEZZA_MAPPA = 1000;
-    private static final double ALTEZZA_MAPPA = 440;
+    private static final double LARGHEZZA_MAPPA = 920;
+    private static final double ALTEZZA_MAPPA = 400;
     private static final double MARGINE_BORDO = 90;
     private static final double RAGGIO_NODO = 26;
     private static final double LARGHEZZA_ETICHETTA = 140;
@@ -72,16 +72,17 @@ public final class MappaView extends Pane {
             cerchioNodo.getStyleClass().add("nodo");
             cerchioNodo.getStyleClass().add(classeCssPerTipo(nodo));
 
-            if (completato) {
-                cerchioNodo.getStyleClass().add("nodo-completato");
-            }
-            else if (accessibile) {
-                cerchioNodo.getStyleClass().add("nodo-accessibile");
-                cerchioNodo.setCursor(Cursor.HAND);
-                cerchioNodo.setOnMouseClicked(evento -> azioneClick.accept(nodo));
-            } else {
-                cerchioNodo.getStyleClass().add("nodo-spento");
-            }
+        if (completato) {
+            cerchioNodo.getStyleClass().add("nodo-completato");
+        } else if (accessibile) {
+            cerchioNodo.getStyleClass().add("nodo-accessibile");
+        } else {
+            cerchioNodo.getStyleClass().add("nodo-spento");
+        }
+        if (accessibile) {
+            cerchioNodo.setCursor(Cursor.HAND);
+            cerchioNodo.setOnMouseClicked(evento -> azioneClick.accept(nodo));
+        }
 
             //etichetta sotto al cerchio (serve mantenere la differenza tra nodi "spenti" ed "accesi")
             Label nomeNodo = new Label(nodo.getId().replace('_', ' '));
@@ -105,9 +106,9 @@ public final class MappaView extends Pane {
     //cambiamo stile CSS in base al tipo di nodo 
     private String classeCssPerTipo(Nodo nodo) {
         return switch (nodo) {
-            case NodoBoss boss -> "nodoboss";
-            case NodoCombattimento combattimento -> "nodocombattimento";
-            case NodoCheckpoint checkpoint -> "nodocheckpoint";
+            case NodoBoss _ -> "nodoboss";
+            case NodoCombattimento _ -> "nodocombattimento";
+            case NodoCheckpoint _ -> "nodocheckpoint";
             default -> throw new IllegalStateException("Tipo nodo non previsto: " + (nodo));
         };
     }

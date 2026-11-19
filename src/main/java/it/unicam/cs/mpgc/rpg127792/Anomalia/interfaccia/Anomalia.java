@@ -23,6 +23,7 @@ public class Anomalia extends Application {
         finestra.setTitle("Anomalia");
         finestra.setResizable(false);
         gestore.mostraMenu();
+        finestra.centerOnScreen();
         finestra.show();
     }
 
