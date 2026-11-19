@@ -1,0 +1,257 @@
+/* Il tema del gioco sarà stile terminale*/
+
+.barra-statistiche {
+    -fx-border-color: #00ff00;
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 12 20 12 20;
+}
+
+.barra-inferiore {
+    -fx-border-color: #00ff00;
+    -fx-border-style: solid;
+    -fx-border-width: 2 0 0 0;
+    -fx-padding: 15 20 15 20;
+}
+
+.root {
+    -fx-background-color: #0a0a0a;
+    -fx-font-family: "Consolas", "Monospaced";
+    -fx-font-size: 18px;
+}
+
+.label {
+    -fx-text-fill: #00ff00;
+}
+
+.titolo-capitolo {
+    -fx-text-fill: #8be9fd;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.titolo {
+    -fx-text-fill: #00ff00;
+    -fx-font-size: 50px;
+    -fx-font-weight: bold;
+}
+
+.sottotitolo {
+    -fx-text-fill: #8be9fd;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Pulsanti */
+.button {
+    -fx-background-color: #11111a;
+    -fx-text-fill: #00ff00;
+    -fx-border-color: #00ff00;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #00ff00;
+    -fx-text-fill: #0a0a0a;
+}
+
+.button:disabled {
+    -fx-opacity: 0.35;
+}
+
+/* Mappa: archi, nodi (per tipo e per stato) ed etichette */
+.riquadro-mappa {
+    -fx-background-color: #0c0c12;
+    -fx-border-color: #44475a;
+    -fx-border-width: 1;
+}
+
+.arco {
+    -fx-stroke: #44475a;
+    -fx-stroke-width: 2;
+}
+
+.nodo {
+    -fx-fill: #1e1e2e;
+    -fx-stroke: #44475a;
+    -fx-stroke-width: 2;
+}
+
+.nodo-spento {
+    -fx-opacity: 0.45;
+}
+
+.nodo-accessibile.nodocombattimento {
+    -fx-stroke: #ff5555;
+    -fx-stroke-width: 4;
+}
+
+.nodo-accessibile.nodocheckpoint {
+    -fx-stroke: #8be9fd;
+    -fx-stroke-width: 4;
+}
+
+.nodo-accessibile.nodoboss {
+    -fx-stroke: #ff5555;
+    -fx-fill: #2a0f12;
+    -fx-stroke-width: 4;
+}
+
+.nodo-completato {
+    -fx-fill: #0f3d1e;
+    -fx-stroke: #00ff00;
+    -fx-stroke-width: 2;
+}
+
+.etichetta-nodo {
+    -fx-text-fill: #6272a4;
+    -fx-font-size: 11px;
+}
+
+.etichetta-nodo-attivo {
+    -fx-text-fill: #f8f8f2;
+    -fx-font-size: 11px;
+}
+
+/* Arena di combattimento */
+
+.titolo-sezione {
+    -fx-text-fill: #00ff00;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.titolo-processi {
+    -fx-text-fill: #ff5555;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.stat-cpu {
+    -fx-text-fill: #8be9fd;
+}
+
+.stat-turno {
+    -fx-text-fill: #f8f8f2;
+}
+
+.log-rete {
+    -fx-control-inner-background: #0a0a0a;
+    -fx-background-color: #0a0a0a;
+    -fx-text-fill: #00ff00;
+    -fx-border-color: #44475a;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.log-rete .content {
+    -fx-background-color: #0a0a0a;
+    -fx-background-radius: 0;
+}
+
+.pannello-processi {
+    -fx-background-color: #0a0a0a;
+    -fx-border-color: #00ff00;
+    -fx-border-width: 2;
+    -fx-padding: 14;
+}
+
+.scroll-processi {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.scheda-nemico {
+    -fx-background-color: #0a0a0a;
+    -fx-border-color: #555555;
+    -fx-border-width: 1;
+    -fx-padding: 12;
+    -fx-cursor: hand;
+}
+
+.scheda-nemico.selezionato {
+    -fx-border-color: #ff5555;
+    -fx-border-width: 2;
+}
+
+.nome-nemico {
+    -fx-text-fill: #ff5555;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.scheda-innocuo {
+    -fx-background-color: #0a0a0a;
+    -fx-border-color: #8be9fd;
+    -fx-border-width: 1;
+    -fx-padding: 12;
+}
+
+.scheda-innocuo .button {
+    -fx-font-size: 11px;
+    -fx-padding: 6 8 6 8;
+}
+
+.nome-innocuo {
+    -fx-text-fill: #8be9fd;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.progress-bar {
+    -fx-min-height: 16px;
+    -fx-pref-height: 16px;
+}
+
+.progress-bar > .track {
+    -fx-background-color: #222222;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: #ff5555;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.bottone-abilita {
+    -fx-font-size: 13px;
+}
+
+.bottone-passa {
+    -fx-border-color: #ff5555;
+    -fx-text-fill: #f8f8f2;
+}
+
+.bottone-passa:hover {
+    -fx-background-color: #ff5555;
+    -fx-text-fill: #0a0a0a;
+}
+/* Schede (Safe Room) */
+
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: #11111a;
+    -fx-background-radius: 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: #bd93f9;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-text-fill: #bd93f9;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected > .tab-container > .tab-label {
+    -fx-text-fill: #0a0a0a;
+}
+
+.tab-pane > .tab-content-area {
+    -fx-background-color: #1e1e2e;
+}

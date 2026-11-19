@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Comportamenti;
+package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.comportamenti;
 
 import java.util.List;
 

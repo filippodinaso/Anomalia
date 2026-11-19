@@ -71,6 +71,8 @@ public final class ProcessoInnocuo {
         return effetti.stream().map(Effetto::descrizione).collect(Collectors.joining(", "));
     }
 
+    public String getAnteprimaAssorbi() { return descrivi(effettiAssorbi); }
+    public String getAnteprimaElimina() { return descrivi(effettiElimina); }
     public String getNome() { return nome; }
     public int getTurniRimanenti() { return turniRimanenti; }
     public Nemico getNemicoAlDecadimento() { return nemicoAlDecadimento; }

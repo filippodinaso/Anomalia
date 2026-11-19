@@ -35,3 +35,7 @@ javafx {
     version = '25'
     modules = ['javafx.controls']
 }
+
+application {
+    mainClass = 'it.unicam.cs.mpgc.rpg127792.Anomalia.interfaccia.Anomalia'
+}
