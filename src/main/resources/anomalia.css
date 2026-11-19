@@ -24,9 +24,15 @@
     -fx-text-fill: #00ff00;
 }
 
+.titolo-capitolo {
+    -fx-text-fill: #8be9fd;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
 .titolo {
     -fx-text-fill: #00ff00;
-    -fx-font-size: 40px;
+    -fx-font-size: 50px;
     -fx-font-weight: bold;
 }
 
@@ -108,4 +114,144 @@
 .etichetta-nodo-attivo {
     -fx-text-fill: #f8f8f2;
     -fx-font-size: 11px;
+}
+
+/* Arena di combattimento */
+
+.titolo-sezione {
+    -fx-text-fill: #00ff00;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.titolo-processi {
+    -fx-text-fill: #ff5555;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.stat-cpu {
+    -fx-text-fill: #8be9fd;
+}
+
+.stat-turno {
+    -fx-text-fill: #f8f8f2;
+}
+
+.log-rete {
+    -fx-control-inner-background: #0a0a0a;
+    -fx-background-color: #0a0a0a;
+    -fx-text-fill: #00ff00;
+    -fx-border-color: #44475a;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.log-rete .content {
+    -fx-background-color: #0a0a0a;
+    -fx-background-radius: 0;
+}
+
+.pannello-processi {
+    -fx-background-color: #0a0a0a;
+    -fx-border-color: #00ff00;
+    -fx-border-width: 2;
+    -fx-padding: 14;
+}
+
+.scroll-processi {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.scheda-nemico {
+    -fx-background-color: #0a0a0a;
+    -fx-border-color: #555555;
+    -fx-border-width: 1;
+    -fx-padding: 12;
+    -fx-cursor: hand;
+}
+
+.scheda-nemico.selezionato {
+    -fx-border-color: #ff5555;
+    -fx-border-width: 2;
+}
+
+.nome-nemico {
+    -fx-text-fill: #ff5555;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.scheda-innocuo {
+    -fx-background-color: #0a0a0a;
+    -fx-border-color: #8be9fd;
+    -fx-border-width: 1;
+    -fx-padding: 12;
+}
+
+.scheda-innocuo .button {
+    -fx-font-size: 11px;
+    -fx-padding: 6 8 6 8;
+}
+
+.nome-innocuo {
+    -fx-text-fill: #8be9fd;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.progress-bar {
+    -fx-min-height: 16px;
+    -fx-pref-height: 16px;
+}
+
+.progress-bar > .track {
+    -fx-background-color: #222222;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: #ff5555;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.bottone-abilita {
+    -fx-font-size: 13px;
+}
+
+.bottone-passa {
+    -fx-border-color: #ff5555;
+    -fx-text-fill: #f8f8f2;
+}
+
+.bottone-passa:hover {
+    -fx-background-color: #ff5555;
+    -fx-text-fill: #0a0a0a;
+}
+/* Schede (Safe Room) */
+
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: #11111a;
+    -fx-background-radius: 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: #bd93f9;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-text-fill: #bd93f9;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected > .tab-container > .tab-label {
+    -fx-text-fill: #0a0a0a;
+}
+
+.tab-pane > .tab-content-area {
+    -fx-background-color: #1e1e2e;
 }

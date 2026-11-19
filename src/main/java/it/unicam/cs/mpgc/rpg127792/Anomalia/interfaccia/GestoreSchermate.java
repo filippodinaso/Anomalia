@@ -3,7 +3,9 @@ package it.unicam.cs.mpgc.rpg127792.Anomalia.interfaccia;
 
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.Nodo;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.RegistroCapitoli;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.nodi.NodoCheckpoint;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.nodi.NodoCombattimento;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.Negozio;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.partita.Partita;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.partita.RepositoryPartite;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RepositorioContenuti;
@@ -17,8 +19,8 @@ import javafx.stage.Stage;
 //Decide quale schermata mostrare e le collega tra loro.
 public final class GestoreSchermate {
 
-    private static final double LARGHEZZA = 1100;
-    private static final double ALTEZZA = 700;
+    private static final double LARGHEZZA = 1000;
+    private static final double ALTEZZA = 650;
 
     private final FabbricaScontri scontri;
     private final Scene scena;
@@ -65,6 +67,11 @@ public final class GestoreSchermate {
         }
         switch (nodo) {
             case NodoCombattimento combattimento -> mostra(new SchermataArena(this, partita, combattimento, scontri));
+            case NodoCheckpoint checkpoint -> {
+                salva(partita);
+                mostra(new SchermataSafeRoom(this, partita,
+                    new Negozio(partita.getGiocatore(), contenuti.abilità(), contenuti.talenti())));
+        }
             default -> throw new IllegalStateException("Nessuna schermata per il nodo " + nodo.getId());
         }
     }

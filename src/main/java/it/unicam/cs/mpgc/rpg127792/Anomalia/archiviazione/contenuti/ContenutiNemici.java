@@ -4,12 +4,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Comportamenti.ComportamentoAssalto;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Comportamenti.ComportamentoBoss;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Comportamenti.ComportamentoSabotaggio;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Comportamenti.ComportamentoSupporto;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.DefinizioneNemico;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Scaling;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.comportamenti.ComportamentoAssalto;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.comportamenti.ComportamentoBoss;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.comportamenti.ComportamentoSabotaggio;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.comportamenti.ComportamentoSupporto;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroNemici;
 
 
