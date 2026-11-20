@@ -57,8 +57,8 @@ public final class GestoreSchermate {
         try {
             mostraHub(Partita.carica(capitoli, contenuti.abilità(), repository));
         } catch (IllegalStateException e) {
-            throw new IllegalStateException("Impossibile caricare la partita.\n" + e.getMessage());
-        }
+            mostraErrore("Impossibile caricare la partita.\n" + e.getMessage());
+    }
     }
 
         public void apri(Partita partita, Nodo nodo) {

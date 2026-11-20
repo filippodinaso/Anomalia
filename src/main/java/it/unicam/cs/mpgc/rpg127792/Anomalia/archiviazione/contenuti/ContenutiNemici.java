@@ -14,7 +14,9 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroNemici;
 
 
 
-// Implementiamo dei nemici
+/**
+ * Contiene le definizioni dei nemici.
+ */
 public final class ContenutiNemici implements RegistroNemici {
 
     public static final String ZOMBIE_PROCESS = "zombie_process";
@@ -27,10 +29,6 @@ public final class ContenutiNemici implements RegistroNemici {
     public ContenutiNemici() {
         List.of(
 
-/*              new DefinizioneNemico(id, nome, 
-                    new Scaling(hp_base, aumento_hp_per_livello), new Scaling(loot_base, aumento_loot_per_livello), 
-                    livello -> new ComportamentoScelto(danno_base + (aumento_danno_per_livello * livello))*/
-                   
                 new DefinizioneNemico(ZOMBIE_PROCESS, "Zombie_Process", 
                     new Scaling(30, 5), new Scaling(15, 5),
                     livello -> new ComportamentoAssalto(10 + 2 * livello)),

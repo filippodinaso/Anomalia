@@ -21,6 +21,7 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.innocuo.ProcessoInnocuo;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Nemico;
 
+/** Gestisce i turni, le azioni e la conclusione di uno scontro. */
 public final class Scontro {
 
     private final Giocatore giocatore;
@@ -29,6 +30,7 @@ public final class Scontro {
     private final Pubblicatore<EventoDiGioco> eventi;
     private StatoScontro stato = StatoScontro.TURNO_GIOCATORE;
     private int turno;
+    private boolean avviato = false;
 
 
     public Scontro(Giocatore giocatore, List<Nemico> nemici, List<ProcessoInnocuo> innocui, Pubblicatore<EventoDiGioco> eventi) {
@@ -39,6 +41,11 @@ public final class Scontro {
     }
 
     public void avvia() {
+        if (avviato) 
+            throw new IllegalStateException("Lo scontro è già stato avviato");
+    
+        avviato = true;
+
         giocatore.iniziaScontro();
         eventi.pubblica(new ScontroIniziato(nemici.size()));
         iniziaTurnoGiocatore();
@@ -52,6 +59,14 @@ public final class Scontro {
 
 //Turno giocatore ---------------
 
+
+/**
+ *  Usa un'abilità durante il turno del giocatore
+ *
+ *  @param abilita 
+ *  @param bersaglio se l'abilità lo richiede 
+ *  @return true se l'abilità viene usata, false se non può essere eseguita
+ */
     public boolean usaAbilità(AbilitàInUso abilità, Nemico bersaglio) {
        
         Abilità definizione = abilità.getDefinizione();
@@ -73,7 +88,7 @@ public final class Scontro {
         return true;
     }
 
-    // Assorbe un processo innocuo. 
+/** Assorbe un processo innocuo. */
     public boolean assorbi(ProcessoInnocuo innocuo) {
         if (!gestire(innocuo)) {
             return false;
@@ -83,7 +98,7 @@ public final class Scontro {
         return true;
     }
 
-    // Elimina un processo innocuo (ricompensa maggiore ma con un prezzo).
+/** Elimina un processo innocuo (ricompensa maggiore ma con un prezzo). */
     public boolean elimina(ProcessoInnocuo innocuo) {
         if (!gestire(innocuo)) {
             return false;
@@ -99,6 +114,9 @@ public final class Scontro {
 
 //Turno dei nemici ----------------
 
+/**
+ * Esegue il turno dei nemici e avvia il turno successivo
+ */
     public void terminaTurno() {
         if (stato != StatoScontro.TURNO_GIOCATORE) {
             return;
@@ -122,7 +140,7 @@ public final class Scontro {
         }
     }
 
-    //I processi ignorati troppo a lungo decadono e al loro posto compare un nemico
+/** I processi ignorati troppo a lungo decadono e al loro posto compare un nemico*/
     private void decadimentoInnocui() {
         List<ProcessoInnocuo> decaduti = new ArrayList<>();
 
@@ -162,6 +180,7 @@ public final class Scontro {
         }
     }
 
+//getter
     public StatoScontro getStato() { return stato; }
     public int getTurno() { return turno; }
     public List<Nemico> getNemici() { return new ArrayList<>(nemici); }

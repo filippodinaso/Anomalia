@@ -14,8 +14,9 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.innocuo.DefinizioneInnocuo;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroInnocui;
 
 
-
-//implementiamo esempi di processi innocui 
+/**
+ * Contiene i processi innocui.
+ */
 public final class ContenutiInnocui implements RegistroInnocui {
 
     public static final String CACHE_DATI = "cache_dati";
@@ -39,7 +40,6 @@ public final class ContenutiInnocui implements RegistroInnocui {
                 List.of(new ModificaStatistica(Statistica.CPU_MASSIMA, 5)),
                 List.of(new ModificaDati(100), 
                         new CuraDiretta(50), 
-                        new ModificaDati(-20), 
                         new BruciaCpu(4))))
 
                 .forEach(innocuo -> innocuoPerId.put(innocuo.id(), innocuo));

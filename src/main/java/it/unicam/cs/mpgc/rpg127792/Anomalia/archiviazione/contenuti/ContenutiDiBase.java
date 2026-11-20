@@ -7,6 +7,9 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroNemici;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroTalenti;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RepositorioContenuti;
 
+/**
+ * Riunisce i registri dei contenuti usati dal gioco.
+ */
 public final class ContenutiDiBase implements RepositorioContenuti {
 
     private final RegistroAbilità abilità;
@@ -14,7 +17,7 @@ public final class ContenutiDiBase implements RepositorioContenuti {
     private final RegistroInnocui innocui;
     private final RegistroTalenti talenti;
 
-    //contenuti predefiniti
+   
     public ContenutiDiBase() {
         this(new ContenutiAbilità(), new ContenutiNemici(), new ContenutiInnocui(), new ContenutiTalenti());
     }

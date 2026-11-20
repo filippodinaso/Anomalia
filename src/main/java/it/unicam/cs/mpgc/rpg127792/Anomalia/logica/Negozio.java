@@ -11,6 +11,7 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Talento;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroAbilità;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroTalenti;
 
+/** Gestisce gli acquisti e la scelta dei talenti nel negozio. */
 public final class Negozio {
 
     public static final int COSTO_BASE_ANOMALIA = 100;
@@ -50,12 +51,15 @@ public final class Negozio {
         return COSTO_BASE_ANOMALIA * giocatore.getProgressione().getLivelloAnomalia();
     }
 
-    //Aumenta di livello
+/**
+ *  Aumenta il livello di Anomalia e prepara le proposte di talento.
+ *
+ *  @return true se l'acquisto riesce, false se mancano i dati o ci sono già proposte da scegliere
+ */
     public boolean compraLivelloAnomalia() {
-                if (!talentiProposti.isEmpty()) 
+        if (!talentiProposti.isEmpty()) 
             return false; //impediamo di sovrascrivere la scelta precedente nel caso comprassimo più livelli
         
-
         if (!giocatore.getProgressione().spendiDati(getCostoProssimaAnomalia())) 
             return false; //non ha abbastanza fondi
         
@@ -65,16 +69,23 @@ public final class Negozio {
     }
 
     public List<Talento> getTalentiProposti() {
-        return talentiProposti;
+        return List.copyOf(talentiProposti);
     }
 
+/**
+ *  Apprende uno dei talenti proposti e rimuove le proposte dopo la scelta.
+ *
+ *  @param talento talento scelto
+ *  @return true se il talento viene appreso
+ */
     public boolean scegliTalento(Talento talento) {
-        if (!talentiProposti.contains(talento)) 
-            return false;
-        
-        boolean appreso = giocatore.apprendi(talento);
-        talentiProposti.clear(); // Chiude la selezione svuotando la lista
-        return appreso;
+    if (!talentiProposti.contains(talento)) 
+        return false;
+    if (!giocatore.apprendi(talento)) 
+        return false;
+
+    talentiProposti.clear();
+        return true;
     }
 
     private List<Talento> estraiTalenti() {

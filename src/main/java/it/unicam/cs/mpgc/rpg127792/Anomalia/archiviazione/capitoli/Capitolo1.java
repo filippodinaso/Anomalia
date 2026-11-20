@@ -16,6 +16,9 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.nodi.NodoBoss;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.nodi.NodoCheckpoint;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.nodi.NodoCombattimento;
 
+/**
+ * Definisce la mappa e i collegamenti del primo capitolo.
+ */
 public final class Capitolo1 implements DefinizioneCapitolo {
 
     public static final String ID = "CAP_01";

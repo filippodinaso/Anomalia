@@ -10,7 +10,7 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.Nodo;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.RegistroCapitoli;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroAbilità;
 
-//stats giocatore e il suo avanzamento nel capitolo 
+/** Gestisce lo stato della partita e il suo avanzamento nel capitolo. */
 public final class Partita {
 
     private final Giocatore giocatore;
@@ -30,7 +30,15 @@ public final class Partita {
         return new Partita(giocatore, new AvanzamentoCapitolo(capitoli.creaPrimo()), capitoli, repository);
     }
 
-    //Ricostruisce la partita salvata
+/**
+ *  Ricostruisce la partita usando lo stato salvato e i registri correnti.
+ *
+ *  @param capitoli registro dei capitoli
+ *  @param abilita registro delle abilità
+ *  @param repository repository del salvataggio
+ *  @return partita ricostruita
+ *  @throws IllegalStateException se il salvataggio non è coerente
+ */
     public static Partita carica(RegistroCapitoli capitoli, RegistroAbilità abilità, RepositoryPartite repository) {
         try {
             StatoPartita stato = repository.carica();
@@ -50,15 +58,21 @@ public final class Partita {
         }
     }
 
-    //Sposta il giocatore nel nodo, se accessibile, e fa scattare l'effetto d'ingresso del nodo.
+/**
+ *  Entra nel nodo se è accessibile e applica l'effetto previsto all'ingresso.
+ *
+ *  @param nodo nodo in cui entrare
+ *  @return true se l'ingresso avviene
+ */
     public boolean entra(Nodo nodo) {
-        if (!avanzamento.entra(nodo)) {
+        if (!avanzamento.entra(nodo)) 
             return false;
-        }
+
         nodo.allIngresso(giocatore);
-        if (nodo.isPuntoDiSalvataggio()) {
+
+        if (nodo.isPuntoDiSalvataggio()) 
             avanzamento.completa(nodo);
-        }
+        
         return true;
     }
 
@@ -69,8 +83,13 @@ public final class Partita {
         avanzamento.completa(nodo);
     }
 
-    //Il giocatore è stato sconfitto e torna all'ultimo checkpoint
+/** Il giocatore sconfitto viene riportato all'ultimo checkpoint,
+ *  perde metà dei FrammentiDati acquisiti fino a quel momento.
+ */
     public void sconfitta() {
+        int dati = giocatore.getProgressione().getFrammentiDati();
+        int perdita = dati / 2 + dati % 2;
+        giocatore.getProgressione().modificaDati(-perdita);
         giocatore.riavvia();
         avanzamento.eseguiRespawn();
     }

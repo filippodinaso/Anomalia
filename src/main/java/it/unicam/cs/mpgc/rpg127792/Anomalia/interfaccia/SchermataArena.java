@@ -151,7 +151,7 @@ public final class SchermataArena extends BorderPane {
         Giocatore giocatore = partita.getGiocatore();
 
         Label nome = new Label("[ " + giocatore.getNome().toUpperCase() + " ]");
-        nome.getStyleClass().add("titolo-capitolo");
+        nome.getStyleClass().add("-nome-giocatore");
 
         Label integrita = new Label("INTEGRITÀ: " + giocatore.getIntegrita() + "/" + giocatore.getIntegritaMassima());
 
@@ -159,7 +159,7 @@ public final class SchermataArena extends BorderPane {
         cpu.getStyleClass().add("stat-cpu");
 
         Label turno = new Label("TURNO: " + scontro.getTurno());
-        turno.getStyleClass().add("stat-turno");
+        turno.getStyleClass().add("dettagli-combattimento");
 
         barraSuperiore.getChildren().setAll(nome, integrita, cpu, turno);
     }
@@ -186,7 +186,7 @@ public final class SchermataArena extends BorderPane {
             String testoHp = "HP " + nemico.getIntegrita() + "/" + nemico.getIntegritaMassima()
                     + (nemico.getScudo() > 0 ? "   SCUDO " + nemico.getScudo() : "");
             Label labelHp = new Label(testoHp);
-            labelHp.getStyleClass().add("stat-turno");
+            labelHp.getStyleClass().add("dettagli-combattimento");
 
             VBox scheda = new VBox(6, nomeNemico, barraHp, labelHp);
             scheda.getStyleClass().add("scheda-nemico");
@@ -281,8 +281,8 @@ private void aggiornaInnocui(boolean turnoGiocatore) {
 
     private Button creaPulsanteAbilità(AbilitàInUso abilità, Giocatore giocatore, boolean turnoGiocatore) {
         Abilità def = abilità.getDefinizione();
-        int ricarica = abilità.getRicaricaRimanente() > 0 ? abilità.getRicaricaRimanente() : def.ricarica();
-        String testo = def.nome() + "\nCPU " + def.costoCpu() + " | CD " + ricarica;
+        String statoRicarica = abilità.isPronta() ? "PRONTA" : "Ricarica: " + abilità.getRicaricaRimanente();
+        String testo = def.nome() + "\nCPU " + def.costoCpu() + " | " + statoRicarica;
 
         Button pulsante = new Button(testo);
         pulsante.setMaxWidth(Double.MAX_VALUE);

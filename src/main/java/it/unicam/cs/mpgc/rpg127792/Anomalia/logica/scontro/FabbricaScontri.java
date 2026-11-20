@@ -12,6 +12,14 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Nemico;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroInnocui;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroNemici;
 
+/**
+ * Crea lO Scontro usando i nemici e i processi innocui indicati nel nodo.
+ *
+ * @param giocatore 
+ * @param nodo da cui ricaviamo i partecipanti
+ * @param eventi 
+ * @return scontro creato
+ */
 public final class FabbricaScontri {
 
     private final RegistroNemici registroNemici;

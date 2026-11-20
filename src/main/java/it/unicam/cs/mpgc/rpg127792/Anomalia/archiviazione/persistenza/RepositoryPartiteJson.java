@@ -13,12 +13,17 @@ import com.google.gson.GsonBuilder;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.partita.RepositoryPartite;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.partita.StatoPartita;
 
-// Conserva la partita in un file JSON
+/**
+ * Salva e carica lo stato della partita da un file JSON.
+ */
 public final class RepositoryPartiteJson implements RepositoryPartite {
 
     private final File file;
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+/**
+ * Crea il repository che userà il file indicato.
+ */
     public RepositoryPartiteJson(File file) {
         this.file = file;
     }

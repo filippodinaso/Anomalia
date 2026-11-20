@@ -10,7 +10,9 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Statistica;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Talento;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroTalenti;
 
-
+/**
+ * Contiene i talenti implementati, sbloccabili salendo di livello Anomalia.
+ */
 public final class ContenutiTalenti implements RegistroTalenti {
 
     private final Map<String, Talento> talentiPerId = new LinkedHashMap<>();

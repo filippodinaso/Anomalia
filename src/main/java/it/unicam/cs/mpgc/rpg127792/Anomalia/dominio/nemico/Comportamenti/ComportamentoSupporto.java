@@ -11,8 +11,8 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Comportamento;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Nemico;
 
- //Protegge con uno scudo il primo alleato in difficoltà (quindi che ha metà integrità o meno), poi deve ricaricarsi
- //Se non c'è nessuno in difficoltà ma la sua "abilità" è carica, supporta se stesso,quando non può o non serve, attacca.
+ //Protegge con uno scudo il primo alleato (compreso se stesso) in difficoltà (quindi che ha metà integrità o meno),
+ //poi deve ricaricarsi, quando non può o non serve, attacca.
 public final class ComportamentoSupporto implements Comportamento {
 
     private final int danno;

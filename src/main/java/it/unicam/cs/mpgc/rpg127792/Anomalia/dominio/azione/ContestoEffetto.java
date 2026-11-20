@@ -18,7 +18,7 @@ public ContestoEffetto{
     if (eventi == null)
         throw new IllegalArgumentException("Il pubblicatore non può essere nullo.");
 
-    if (bersagli==null)
+    if (bersagli==null || bersagli.isEmpty())
         throw new IllegalArgumentException("La lista dei bersagli non può essere vuota.");
 
     //Copiamo lista bersagli per averne una immutabile garantendo il contesto

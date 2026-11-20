@@ -30,6 +30,12 @@
     -fx-font-weight: bold;
 }
 
+.nome-giocatore {
+    -fx-text-fill: #8be9fd;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
 .titolo {
     -fx-text-fill: #00ff00;
     -fx-font-size: 50px;
@@ -134,7 +140,7 @@
     -fx-text-fill: #8be9fd;
 }
 
-.stat-turno {
+.dettagli-combattimento {
     -fx-text-fill: #f8f8f2;
 }
 
@@ -163,8 +169,12 @@
 }
 
 .scroll-processi {
+    -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-padding: 0;
+}
+
+.scroll-processi > .viewport {
     -fx-background-color: transparent;
 }
 

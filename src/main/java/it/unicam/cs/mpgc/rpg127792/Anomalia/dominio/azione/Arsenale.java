@@ -65,6 +65,9 @@ public final class Arsenale {
 
 
     public boolean rimuoviDalDeck(String idAbilita) {
+        if (deck.size() <= 1) 
+            return false;
+        
         return deck.removeIf(a -> a.getDefinizione().id().equals(idAbilita));
     }
 
