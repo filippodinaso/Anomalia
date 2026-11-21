@@ -12,14 +12,7 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Nemico;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroInnocui;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroNemici;
 
-/**
- * Crea lO Scontro usando i nemici e i processi innocui indicati nel nodo.
- *
- * @param giocatore 
- * @param nodo da cui ricaviamo i partecipanti
- * @param eventi 
- * @return scontro creato
- */
+
 public final class FabbricaScontri {
 
     private final RegistroNemici registroNemici;
@@ -30,6 +23,14 @@ public final class FabbricaScontri {
         this.registroInnocui = registroInnocui;
     }
 
+/**
+ *  Crea lo Scontro usando i nemici e i processi innocui indicati nel nodo.
+ *
+ *  @param giocatore 
+ *  @param nodo da cui ricaviamo i partecipanti
+ *  @param eventi 
+ *  @return scontro creato
+ */
     public Scontro crea(Giocatore giocatore, NodoCombattimento nodo, Pubblicatore<EventoDiGioco> eventi) {
         int livelloAnomalia = giocatore.getProgressione().getLivelloAnomalia();
         int rango = nodo.getRango();

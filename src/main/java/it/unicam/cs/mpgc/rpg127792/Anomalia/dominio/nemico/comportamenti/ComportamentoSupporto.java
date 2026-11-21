@@ -34,9 +34,13 @@ public final class ComportamentoSupporto implements Comportamento {
  @Override
     public void agisci(Nemico esecutore, Giocatore giocatore, List<Nemico> alleati, Pubblicatore<EventoDiGioco> eventi) {
         
-        if (ricaricaRimanente > 0) {
+        if (danno < 0 || scudo < 0) 
+            throw new IllegalArgumentException("I valori del comportamento del boss non sono validi.");
+
+
+        if (ricaricaRimanente > 0) 
             ricaricaRimanente--;
-        }
+        
 
         Nemico inDifficoltà = null;
 

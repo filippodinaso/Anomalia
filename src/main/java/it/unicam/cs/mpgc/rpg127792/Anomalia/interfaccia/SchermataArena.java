@@ -1,18 +1,16 @@
 package it.unicam.cs.mpgc.rpg127792.Anomalia.interfaccia;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Abilità;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.AbilitàInUso;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.EventoDiGioco;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.Pubblicatore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.innocuo.ProcessoInnocuo;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.nodi.NodoCombattimento;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Nemico;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.partita.Partita;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.scontro.FabbricaScontri;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.scontro.Scontro;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controllori.ControllerScontro;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.scontro.StatoScontro;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,13 +26,11 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
-//schermata di combattimento: stato in alto, log di rete a sinistra, processi a destra e comandi in basso
+/** Schermata del combattimento: stato scontro e azioni disponibili. */ 
 public final class SchermataArena extends BorderPane {
 
     private final GestoreSchermate gestore;
-    private final Partita partita;
-    private final NodoCombattimento nodo;
-    private final Scontro scontro;
+    private final ControllerScontro controller;
 
     private final HBox barraSuperiore = new HBox(35);
     private final TextArea logRete = new TextArea();
@@ -43,18 +39,19 @@ public final class SchermataArena extends BorderPane {
     private final HBox barraBottoniComandi = new HBox(10);
     private Nemico selezionato;
 
-    public SchermataArena(GestoreSchermate gestore, Partita partita, NodoCombattimento nodo, FabbricaScontri fabbrica) {
+/**
+ *  Crea la schermata e collega gli eventi dello scontro al log.
+ *
+ *  @param gestore gestore delle schermate (per tornare all'hub)
+ *  @param creaController funzione che crea il controller collegandolo al log
+ */
+    public SchermataArena(GestoreSchermate gestore, Function<Consumer<String>, ControllerScontro> creaController) {
         this.gestore = gestore;
-        this.partita = partita;
-        this.nodo = nodo;
 
-        //ogni evento pubblicato viene tradotto e aggiunto al log di rete
-       Pubblicatore<EventoDiGioco> eventi = evento -> {
-       logRete.appendText(FormattatoreEventi.formatta(evento) + "\n");
-       };
-        this.scontro = fabbrica.crea(partita.getGiocatore(), nodo, eventi);
-        this.scontro.avvia();
-        this.selezionato = scontro.getNemici().get(0);
+        Consumer<String> aggiungiAlLog = testo -> logRete.appendText(testo + "\n");
+
+        this.controller = creaController.apply(aggiungiAlLog);
+        this.selezionato = controller.getNemici().getFirst();
 
         setTop(creaBarraSuperiore());
         setCenter(creaSezioneLog());
@@ -64,15 +61,15 @@ public final class SchermataArena extends BorderPane {
         aggiorna();
     }
 
-    //barra in alto con nome giocatore, integrità, cpu e turno attuale
+//  Prepara il contenitore della barra superiore
     private HBox creaBarraSuperiore() {
         barraSuperiore.setAlignment(Pos.CENTER_LEFT);
         barraSuperiore.getStyleClass().add("barra-statistiche");
         return barraSuperiore;
     }
 
-    //area centrale con il titolo "> LOG DI RETE" e il riquadro del terminale
-   private VBox creaSezioneLog() {
+//  Area centrale con il titolo e il riquadro del terminale
+    private VBox creaSezioneLog() {
     Label titoloLog = new Label("> LOG DI RETE");
     titoloLog.getStyleClass().add("titolo-sezione");
 
@@ -88,7 +85,7 @@ public final class SchermataArena extends BorderPane {
     return sezioneLog;
 }
 
-//pannello verde a destra con scorrimento interno per nemici e processi innocui
+//  Pannello verde a destra con scorrimento interno per nemici e processi innocui
     private VBox creaPannelloProcessi() {
         Label titoloProcessi = new Label("> PROCESSI RILEVATI");
         titoloProcessi.getStyleClass().add("titolo-processi");
@@ -118,7 +115,7 @@ public final class SchermataArena extends BorderPane {
         return wrapperDestro;
     }
 
-    //barra inferiore con la linea verde sopra, il titolo e i pulsanti delle abilità affiancati
+//  Barra inferiore con la linea verde sopra, il titolo e i pulsanti delle abilità affiancati
     private VBox creaConsoleComandi() {
         Label titoloConsole = new Label("> CONSOLE DEI COMANDI");
         titoloConsole.getStyleClass().add("titolo-sezione");
@@ -130,47 +127,57 @@ public final class SchermataArena extends BorderPane {
         return console;
     }
 
-    //aggiorna tutti i pannelli dopo ogni azione o fine turno
+//  Aggiorna tutti i pannelli dopo ogni azione o fine turno
     private void aggiorna() {
-        boolean turnoGiocatore = scontro.getStato() == StatoScontro.TURNO_GIOCATORE;
+        boolean turnoGiocatore = controller.getStato() == StatoScontro.TURNO_GIOCATORE;
         aggiornaBarraSuperiore();
         aggiornaNemici();
         aggiornaInnocui(turnoGiocatore);
         aggiornaComandi(turnoGiocatore);
     }
 
-    private Nemico bersaglio() {
-        List<Nemico> nemici = scontro.getNemici();
+/**
+ *  Restituisce il nemico selezionato o il primo rimasto se quello selezionato non è più presente
+ *
+ *  @return bersaglio disponibile o vuoto se non ci sono nemici
+ */
+    private Optional<Nemico> bersaglio() {
+        List<Nemico> nemici = controller.getNemici();
         if (nemici.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
-        return nemici.contains(selezionato) ? selezionato : nemici.get(0);
+        if (nemici.contains(selezionato)) {
+            return Optional.of(selezionato);
+        }
+        return Optional.of(nemici.getFirst());
     }
 
     private void aggiornaBarraSuperiore() {
-        Giocatore giocatore = partita.getGiocatore();
+        Giocatore giocatore = controller.getGiocatore();
 
         Label nome = new Label("[ " + giocatore.getNome().toUpperCase() + " ]");
-        nome.getStyleClass().add("-nome-giocatore");
+        nome.getStyleClass().add("nome-giocatore");
 
         Label integrita = new Label("INTEGRITÀ: " + giocatore.getIntegrita() + "/" + giocatore.getIntegritaMassima());
 
         Label cpu = new Label("CPU: " + giocatore.getCpu().getCorrente() + "/" + giocatore.getCpu().getMassima());
         cpu.getStyleClass().add("stat-cpu");
 
-        Label turno = new Label("TURNO: " + scontro.getTurno());
+        Label turno = new Label("TURNO: " + controller.getTurno());
         turno.getStyleClass().add("dettagli-combattimento");
 
         barraSuperiore.getChildren().setAll(nome, integrita, cpu, turno);
     }
 
-   private void aggiornaNemici() {
+/** Ricrea le schede dei nemici e permette di selezionare il bersaglio. */
+    private void aggiornaNemici() {
         listaNemici.getChildren().clear();
-        if (scontro.getNemici().isEmpty()) {
+        List<Nemico> nemici = controller.getNemici();
+        if (nemici.isEmpty()) {
             return;
         }
-        Nemico scelto = bersaglio();
-        for (Nemico nemico : scontro.getNemici()) {
+        Nemico scelto = bersaglio().orElse(null);
+        for (Nemico nemico : nemici) {
             Label nomeNemico = new Label(nemico.getNome() + "  LV " + nemico.getLivello());
             nomeNemico.getStyleClass().add("nome-nemico");
             nomeNemico.setWrapText(true);
@@ -200,9 +207,11 @@ public final class SchermataArena extends BorderPane {
             listaNemici.getChildren().add(scheda);
         }
     }
-private void aggiornaInnocui(boolean turnoGiocatore) {
+
+/** Ricrea le schede dei processi non gestiti e abilita le azioni solo nel turno del giocatore.*/    
+    private void aggiornaInnocui(boolean turnoGiocatore) {
         listaInnocui.getChildren().clear();
-        for (ProcessoInnocuo processo : scontro.getInnocui()) {
+        for (ProcessoInnocuo processo : controller.getInnocui()) {
             if (processo.isGestito()) {
                 continue;
             }
@@ -218,7 +227,7 @@ private void aggiornaInnocui(boolean turnoGiocatore) {
             assorbi.setTextAlignment(TextAlignment.CENTER);
             assorbi.setDisable(!turnoGiocatore);
             assorbi.setOnAction(e -> {
-                scontro.assorbi(processo);
+                controller.assorbi(processo);
                 aggiorna();
             });
 
@@ -229,7 +238,7 @@ private void aggiornaInnocui(boolean turnoGiocatore) {
             elimina.setTextAlignment(TextAlignment.CENTER);
             elimina.setDisable(!turnoGiocatore);
             elimina.setOnAction(e -> {
-                scontro.elimina(processo);
+                controller.elimina(processo);
                 aggiorna();
             });
 
@@ -239,11 +248,12 @@ private void aggiornaInnocui(boolean turnoGiocatore) {
         }
     }
 
+/** Ricreiamo i comandi in base alla fase dello scontro.*/
     private void aggiornaComandi(boolean turnoGiocatore) {
         barraBottoniComandi.getChildren().clear();
-        Giocatore giocatore = partita.getGiocatore();
 
-        switch (scontro.getStato()) {
+        Giocatore giocatore = controller.getGiocatore();
+        switch (controller.getStato()) {
             case TURNO_GIOCATORE -> {
                 for (AbilitàInUso abilità : giocatore.getArsenale().getDeck()) {
                     Button pulsante = creaPulsanteAbilità(abilità, giocatore, turnoGiocatore);
@@ -255,7 +265,7 @@ private void aggiornaInnocui(boolean turnoGiocatore) {
                 passaTurno.setMinWidth(135);
                 passaTurno.setPrefHeight(50);
                 passaTurno.setOnAction(e -> {
-                    scontro.terminaTurno();
+                    controller.terminaTurno();
                     aggiorna();
                 });
                 barraBottoniComandi.getChildren().add(passaTurno);
@@ -263,22 +273,23 @@ private void aggiornaInnocui(boolean turnoGiocatore) {
             case VITTORIA -> {
                 Button continua = new Button("> CONTINUA");
                 continua.setOnAction(e -> {
-                    partita.vittoria(nodo);
-                    gestore.mostraHub(partita);
+                    controller.confermaVittoria();
+                    gestore.aggiornaHub();
                 });
                 barraBottoniComandi.getChildren().addAll(new Label("SCONTRO SUPERATO"), continua);
             }
             case SCONFITTA -> {
                 Button riparti = new Button("> RIPARTI DAL CHECKPOINT");
                 riparti.setOnAction(e -> {
-                    partita.sconfitta();
-                    gestore.mostraHub(partita);
+                    controller.ripartiDalCheckpoint();
+                    gestore.aggiornaHub();
                 });
                 barraBottoniComandi.getChildren().addAll(new Label("SISTEMA COMPROMESSO"), riparti);
             }
         }
     }
 
+/** Crea il pulsante di un'abilità e lo disabilita se non è utilizzabile */
     private Button creaPulsanteAbilità(AbilitàInUso abilità, Giocatore giocatore, boolean turnoGiocatore) {
         Abilità def = abilità.getDefinizione();
         String statoRicarica = abilità.isPronta() ? "PRONTA" : "Ricarica: " + abilità.getRicaricaRimanente();
@@ -291,7 +302,7 @@ private void aggiornaInnocui(boolean turnoGiocatore) {
         pulsante.getStyleClass().add("bottone-abilita");
         pulsante.setDisable(!turnoGiocatore || !abilità.isPronta() || giocatore.getCpu().getCorrente() < def.costoCpu());
         pulsante.setOnAction(e -> {
-            scontro.usaAbilità(abilità, bersaglio());
+            controller.usaAbilità(abilità, bersaglio());
             aggiorna();
         });
         return pulsante;

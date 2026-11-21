@@ -19,7 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-//pannello grafico che disegna i nodi e i collegamenti della mappa del capitolo
+/**Pannello grafico che disegna i nodi e i collegamenti della mappa del capitolo*/
 public final class MappaView extends Pane {
 
     private static final double LARGHEZZA_MAPPA = 920;
@@ -59,7 +59,7 @@ public final class MappaView extends Pane {
         }
     }
 
-    //disegna tutti i nodi sopra le linee di collegamento
+/** Disegna tutti i nodi sopra le linee di collegamento*/
     private void disegnaNodi(MappaCapitolo mappa, AvanzamentoCapitolo avanzamento, Consumer<Nodo> azioneClick) {
         for (Nodo nodo : mappa.getNodi()) {
             double centroX = coordinataX.get(nodo);
@@ -103,7 +103,7 @@ public final class MappaView extends Pane {
         }
     }
 
-    //cambiamo stile CSS in base al tipo di nodo 
+/** Cambiamo stile CSS in base al tipo di nodo*/ 
     private String classeCssPerTipo(Nodo nodo) {
         return switch (nodo) {
             case NodoBoss _ -> "nodoboss";
@@ -113,7 +113,7 @@ public final class MappaView extends Pane {
         };
     }
 
-    //assegna a ciascun nodo una posizione X e Y esplorando la mappa dalla partenza
+/** Assegna a ciascun nodo una posizione X e Y esplorando la mappa dalla partenza*/
     private void calcolaCoordinateNodi(MappaCapitolo mappa) {
         Map<Nodo, Integer> colonnaDelNodo = new HashMap<>();
         List<Nodo> nodiDaEsplorare = new ArrayList<>();

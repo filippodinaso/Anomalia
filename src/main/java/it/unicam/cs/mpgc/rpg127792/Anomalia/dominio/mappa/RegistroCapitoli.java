@@ -13,6 +13,9 @@ public final class RegistroCapitoli {
 
     public RegistroCapitoli registra(DefinizioneCapitolo definizione) {
 
+        if (definizione == null) 
+            throw new IllegalArgumentException("La definizione del capitolo non può essere null.");
+    
         if (definizioni.containsKey(definizione.getId())) 
             throw new IllegalArgumentException("Capitolo già registrato: " + definizione.getId());
         

@@ -5,6 +5,7 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Effetto;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Combattente;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
 
+/** Effetto che modifica i FrammentiDati del giocatore */
 public final class ModificaDati implements Effetto {
 
     private final int variazione;

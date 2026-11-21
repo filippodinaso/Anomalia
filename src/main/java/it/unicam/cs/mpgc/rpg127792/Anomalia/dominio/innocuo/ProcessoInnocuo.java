@@ -11,9 +11,7 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.Pubblicatore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Nemico;
 
-//Un processo innocuo sarà un processo che non attaccherà il giocatore ma che lo metterà di fronte ad una scelta (Assorbi o Elimina)
-//tale scelta definirà quali delle due liste effetti sarà applicata sul player
-//L'entità avrà una scadenza (turniRImanenti), dopodichè decadrà 
+/** Processo temporaneo con due scelte; se non viene gestito entro la scadenza, genera un nemico.*/
 public final class ProcessoInnocuo {
 
     private final String nome;

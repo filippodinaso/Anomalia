@@ -20,12 +20,12 @@ public final class DannoDiretto implements Effetto {
         this.conBonus = conBonus;
     }
 
-    // al danno base si somma il bonus dell'esecutore.
+//  Al danno base si somma il bonus dell'esecutore.
     public static DannoDiretto attacco(int danno) {
         return new DannoDiretto(danno, true);
     }
 
-    // solo danno senza bonus (per implementazioni future (costo di una scelta))
+//  Solo danno senza bonus (costo di una scelta)
     public static DannoDiretto fisso(int danno) {
         return new DannoDiretto(danno, false);
     }

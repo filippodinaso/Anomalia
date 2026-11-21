@@ -59,16 +59,20 @@ public final class Partita {
     }
 
 /**
- *  Entra nel nodo se è accessibile e applica l'effetto previsto all'ingresso.
+ *  Entra nel nodo se è accessibile e applica l'effetto previsto all'ingresso (se è il primo ingresso).
  *
  *  @param nodo nodo in cui entrare
  *  @return true se l'ingresso avviene
  */
     public boolean entra(Nodo nodo) {
-        if (!avanzamento.entra(nodo)) 
-            return false;
+    
+        boolean primoIngresso = nodo.isPuntoDiSalvataggio() && !avanzamento.isCompletato(nodo);
 
-        nodo.allIngresso(giocatore);
+        if (!avanzamento.entra(nodo)) 
+             return false;
+
+        if (!nodo.isPuntoDiSalvataggio() || primoIngresso)
+             nodo.allIngresso(giocatore);
 
         if (nodo.isPuntoDiSalvataggio()) 
             avanzamento.completa(nodo);

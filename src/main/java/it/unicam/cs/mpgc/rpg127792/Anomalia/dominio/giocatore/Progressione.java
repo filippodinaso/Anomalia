@@ -11,16 +11,16 @@ public final class Progressione {
 
    private int livelloAnomalia;
    private int frammentiDati;
-   //No dpublicati e talenti ordinati
+   //No duplicati e talenti ordinati
    private final Set<String> talenti = new LinkedHashSet<>();
 
-//Costruttore da 0
+
 public Progressione(){
 this.livelloAnomalia=LIVELLO_INIZIALE;
 this.frammentiDati=0;
 }
 
-//Per i salvataggi (Usiamo collection per flessibilità)
+//Per i salvataggi 
 public static Progressione ripristinata(int livelloAnomalia, int frammentiDati, Collection<String> talenti){
     
     if (livelloAnomalia < LIVELLO_INIZIALE || frammentiDati < 0 || talenti == null)
@@ -34,8 +34,6 @@ public static Progressione ripristinata(int livelloAnomalia, int frammentiDati, 
     return progressione;
 } 
     
-
-//Metodi
     public void modificaDati(int variazione) {
         frammentiDati = Math.max(0, frammentiDati + variazione);
     }
@@ -63,8 +61,6 @@ public static Progressione ripristinata(int livelloAnomalia, int frammentiDati, 
         return talenti.contains(idTalento);
     }
 
-
-//getter
     public int getLivelloAnomalia() { return livelloAnomalia; }
     public int getFrammentiDati() { return frammentiDati; }
     public Set<String> getTalenti() { return Collections.unmodifiableSet(talenti); }

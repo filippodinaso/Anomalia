@@ -18,6 +18,9 @@ public final class ComportamentoSabotaggio implements Comportamento {
     private final int cpuBruciata;
 
     public ComportamentoSabotaggio(int danno, int cpuBruciata) {
+        if (danno < 0 || cpuBruciata < 0) 
+             throw new IllegalArgumentException("Danno e CPU bruciata non possono essere negativi.");
+
         this.danno = danno;
         this.cpuBruciata = cpuBruciata;
     }

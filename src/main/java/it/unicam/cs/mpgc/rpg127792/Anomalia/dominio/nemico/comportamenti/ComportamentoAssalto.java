@@ -16,6 +16,9 @@ public final class ComportamentoAssalto implements Comportamento {
     private final int danno;
 
     public ComportamentoAssalto(int danno) {
+         if (danno < 0) 
+             throw new IllegalArgumentException("Il danno non può essere negativo.");
+    
         this.danno = danno;
     }
 

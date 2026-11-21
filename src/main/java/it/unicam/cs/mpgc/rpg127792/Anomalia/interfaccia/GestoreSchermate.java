@@ -1,13 +1,12 @@
 package it.unicam.cs.mpgc.rpg127792.Anomalia.interfaccia;
 
-
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.Nodo;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.RegistroCapitoli;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.nodi.NodoCheckpoint;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.nodi.NodoCombattimento;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.Negozio;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controllori.ControllerPartita;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controllori.ControllerSafeRoom;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controllori.ControllerScontro;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.partita.Partita;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.partita.RepositoryPartite;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RepositorioContenuti;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.scontro.FabbricaScontri;
 import javafx.scene.Parent;
@@ -16,7 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-//Decide quale schermata mostrare e le collega tra loro.
+/** Coordina le schermate JavaFX e mantiene la partita corrente. */
 public final class GestoreSchermate {
 
     private static final double LARGHEZZA = 1000;
@@ -25,72 +24,105 @@ public final class GestoreSchermate {
     private final FabbricaScontri scontri;
     private final Scene scena;
     private final RepositorioContenuti contenuti;
-    private final RegistroCapitoli capitoli;
-    private final RepositoryPartite repository;
+    private final ControllerPartita controllerPartita;
+    private Partita partitaCorrente;
 
 
-    public GestoreSchermate(Stage finestra, RepositorioContenuti contenuti, RegistroCapitoli capitoli, RepositoryPartite repository) {
+/**
+ *  Prepara la finestra principale e crea gli oggetti condivisi dalle schermate.
+ *
+ *  @param finestra finestra principale dell'applicazione
+ *  @param contenuti contenuti usati per creare gli scontri e la Safe Room
+ *  @param controllerPartita controller delle operazioni sulla partita
+ */
+    public GestoreSchermate(Stage finestra, RepositorioContenuti contenuti, ControllerPartita controllerPartita) {
         this.contenuti = contenuti;
-        this.capitoli = capitoli;
-        this.repository = repository;
+        this.controllerPartita = controllerPartita;
         this.scontri = new FabbricaScontri(contenuti.nemici(), contenuti.innocui());
         this.scena = new Scene(new StackPane(), LARGHEZZA, ALTEZZA);
         this.scena.getStylesheets().add(GestoreSchermate.class.getResource("/anomalia.css").toExternalForm());
         finestra.setScene(scena);
     }
 
-    //Menu
-
     public void mostraMenu() {
         mostra(new SchermataMenu(this));
     }
 
     public boolean esisteSalvataggio() {
-        return repository.esiste();
+        return controllerPartita.esisteSalvataggio();
     }
 
     public void nuovaPartita() {
-        mostraHub(Partita.nuova(capitoli, contenuti.abilità(), repository));
+        mostraHub(controllerPartita.nuovaPartita());
     }
 
+    /** Carica la partita salvata e mostra un errore se il caricamento fallisce. */
     public void continuaPartita() {
         try {
-            mostraHub(Partita.carica(capitoli, contenuti.abilità(), repository));
+            mostraHub(controllerPartita.continuaPartita());
         } catch (IllegalStateException e) {
             mostraErrore("Impossibile caricare la partita.\n" + e.getMessage());
-    }
+        }
     }
 
-        public void apri(Partita partita, Nodo nodo) {
-        if (!partita.entra(nodo)) {
+/**
+ *  Apre la schermata prevista per il nodo passato come argomento.
+ */
+    public void apri(Nodo nodo) {
+        if (partitaCorrente == null) {
             return;
         }
-        switch (nodo) {
-            case NodoCombattimento combattimento -> mostra(new SchermataArena(this, partita, combattimento, scontri));
-            case NodoCheckpoint checkpoint -> {
-                salva(partita);
-                mostra(new SchermataSafeRoom(this, partita,
-                    new Negozio(partita.getGiocatore(), contenuti.abilità(), contenuti.talenti())));
+
+        if (!controllerPartita.entra(partitaCorrente, nodo)) {
+            return;
         }
+
+        switch (nodo) {
+            case NodoCombattimento combattimento -> mostra(new SchermataArena(this, aggiungiAlLog ->
+                    new ControllerScontro(partitaCorrente, combattimento, scontri, evento -> aggiungiAlLog.accept(FormattatoreEventi.formatta(evento)))));
+            case NodoCheckpoint checkpoint -> {
+                salvaPartitaCorrente();
+                ControllerSafeRoom controller = new ControllerSafeRoom(partitaCorrente, contenuti.abilità(), contenuti.talenti());
+                mostra(new SchermataSafeRoom(this, controller));
+            }
             default -> throw new IllegalStateException("Nessuna schermata per il nodo " + nodo.getId());
         }
     }
 
-    public void salva(Partita partita) {
+/** Salva la partita corrente e segnala eventuali errori. */
+    public void salvaPartitaCorrente() {
+       if (partitaCorrente == null) 
+            return;
+    
         try {
-            partita.salva();
+            controllerPartita.salva(partitaCorrente);
         } catch (IllegalStateException e) {
             mostraErrore("Impossibile salvare la partita.\n" + e.getMessage());
         }
     }
-
+/** Sostituisce la schermata corrente con quella passata come argomento */
     private void mostra(Parent contenuto) {
         scena.setRoot(contenuto);
     }
 
+/** Aggiorna partitaCorrente, poi chiama aggiornaHub  */ 
     public void mostraHub(Partita partita) {
-        salva(partita);
-        mostra(new SchermataHub(this, partita));
+        partitaCorrente = partita;
+        aggiornaHub();
+    }
+
+/** Se partitaCorrente esiste, salva e ne mostra la schermata hub aggiornata */
+    public void aggiornaHub() {
+        if (partitaCorrente == null) {
+            return;
+        }
+        salvaPartitaCorrente();
+        mostra(new SchermataHub(this, partitaCorrente));
+    }
+
+    public void avanzaCapitolo() {
+        controllerPartita.avanzaCapitolo(partitaCorrente);
+        aggiornaHub();
     }
 
     private void mostraErrore(String messaggio) {
@@ -98,4 +130,4 @@ public final class GestoreSchermate {
         avviso.setHeaderText(null);
         avviso.showAndWait();
     }
-}    
+}

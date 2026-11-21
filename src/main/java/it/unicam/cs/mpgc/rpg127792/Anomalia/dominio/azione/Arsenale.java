@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/** Gestisce le abilità sbloccate e quelle equipaggiate nel deck. */
 public final class Arsenale {
 
     private final int dimensioneDeck;
+    //Abilità acquisite
     private final List<Abilità> zaino = new ArrayList<>();
+    //Abilità equipaggiate
     private final List<AbilitàInUso> deck = new ArrayList<>();
 
     public Arsenale(int dimensioneDeck) {
@@ -32,9 +35,6 @@ public final class Arsenale {
     }
 
     public boolean possiede(String idAbilità){
-
-        //usiamo uno straem per trovare almeno un match nello zaino con l'abilità che abbiamo passato al metodo
-        //se non la trova ritorna false
         return zaino.stream().anyMatch(a->a.id().equals(idAbilità));
     }
 

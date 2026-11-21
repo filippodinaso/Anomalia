@@ -1,12 +1,16 @@
 package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione;
 
-//L'abilità è una combinazione di effetti su un dato bersaglio, costa al player cpu (stamina) ed ha un tempo di ricarica
-//usiamo sia id che nome, in modo da poter cambiare il nome dell'abilità ma avere sempre una final reference a quest'ultima tramite id
 
 import java.util.ArrayList;
 import java.util.List;
-
-//Definizione abilità
+/**
+ * @param id final reference
+ * @param nome 
+ * @param costoCpu costo stamina dell'abilità
+ * @param ricarica turni di ricarica necessari
+ * @param bersaglio regola che decide chi viene colpito
+ * @param effetti lista effetti applicati dall'abilità
+ */
 public record Abilità(String id, String nome, int costoCpu, int ricarica, Bersaglio bersaglio, List<Effetto> effetti) {
    
 public Abilità{

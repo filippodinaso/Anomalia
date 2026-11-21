@@ -6,7 +6,7 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Abilità;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Arsenale;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Cpu;
 
-//Fotografia del giocatore
+// Dati del giocatore usati per salvarlo e ricostruirlo.
 public record IstantaneaGiocatore(
         int integrita, int integritaMassima,
         int cpuMassima, int cpuCorrente, int cpuRigenerazione,
@@ -34,8 +34,8 @@ public record IstantaneaGiocatore(
                 arsenale.getDeck().stream().map(inUso -> inUso.getDefinizione().id()).toList()); //Abilità equipaggiate
     }
 
-//riceve le liste di Abilità da Partita hce li recupera a partire dagli ID salvati
-//(i talenti vengono solo registrati senza riapplicarne gli effetti che sono già inclusi nelle statistiche)
+/** Ricostruisce il giocatore usando le abilità risolte dal registro in Partita.
+    I talenti vengono registrati senza riapplicarne gli effetti, già inclusi nelle statistiche salvate. */
     public Giocatore ricostruisci(List<Abilità> arsenaleIniziale, List<Abilità> zaino, List<Abilità> deck) {
         controllaCorrispondenza(idZaino, zaino);
         controllaCorrispondenza(idDeck, deck);

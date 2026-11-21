@@ -14,7 +14,9 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.effetti.DannoDiretto;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.effetti.ScudoDiretto;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.registri.RegistroAbilità;
 
-//implementiamo le prime abilità 
+/**
+ * Contiene le abilità iniziali e quelle disponibili nel negozio.
+ */
 public final class ContenutiAbilità implements RegistroAbilità {
 
     public static final String PING_ESECUTIVO = "ping_esecutivo";

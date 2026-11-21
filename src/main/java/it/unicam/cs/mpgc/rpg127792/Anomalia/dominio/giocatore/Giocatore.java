@@ -15,7 +15,7 @@ import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaI
 import static it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.StatisticaIniziale.RIGENERAZIONE_CPU_INIZIALE;
 
 
-//Personaggio controllato dall'utente 
+
 public class Giocatore extends Combattente {
 
 
@@ -30,11 +30,19 @@ private final BonusGiocatore bonus;
 
 public Giocatore(List<Abilità> arsenaleIniziale) {
         this(arsenaleIniziale, new Cpu(CPU_INIZIALE, RIGENERAZIONE_CPU_INIZIALE), new Progressione(), new BonusGiocatore(), INTEGRITA_INIZIALE, INTEGRITA_INIZIALE);
-    }
+}
 
-    //Assembla il giocatore da componenti già pronte
-    Giocatore(List<Abilità> arsenaleIniziale, Cpu cpu, Progressione progressione, BonusGiocatore bonus,
-              int integritaMassima, int integrita) {
+    /**
+     * Ricostruisce il giocatore con i valori ripristinati dal salvataggio
+     * 
+     * @param arsenaleIniziale
+     * @param cpu
+     * @param progressione
+     * @param bonus
+     * @param integritaMassima
+     * @param integrita
+     */
+    Giocatore(List<Abilità> arsenaleIniziale, Cpu cpu, Progressione progressione, BonusGiocatore bonus, int integritaMassima, int integrita) {
         super(NOME, integritaMassima);
         ripristinaStato(integritaMassima, integrita);
         this.cpu = cpu;
@@ -46,14 +54,14 @@ public Giocatore(List<Abilità> arsenaleIniziale) {
     }
 
 
-    //rigenerazioni inizio scontro
+//  Ripristina la CPU, le ricariche delle abilità e azzera lo scudo a inizio scontro.
     public void iniziaScontro() {
         azzeraScudo();
         cpu.ripristina();
         arsenale.azzeraRicariche();
     }
 
-    //rigenerazioni inizio turno
+//  Rigenera integrità e CPU all'inizio del turno mentre dal secondo turno aggiorna le ricariche.
     public void iniziaTurno(int numeroTurno) {
         if(numeroTurno>1)
              arsenale.avanzaRicariche();
@@ -67,7 +75,7 @@ public Giocatore(List<Abilità> arsenaleIniziale) {
         azzeraScudo();
         cpu.ripristina();
         arsenale.svuota();   //le abilità dovranno essere riacquistate, ciò che farà aumentare di livello il giocatore sono i talenti e l'anomalia
-        arsenale.inizializza(arsenaleIniziale);
+        arsenale.inizializza(arsenaleIniziale); //Solo le abilità iniziali sono permanenti
     }
 
     public void aumentaAnomalia() {

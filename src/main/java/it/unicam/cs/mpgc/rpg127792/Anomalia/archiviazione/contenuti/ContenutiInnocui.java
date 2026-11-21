@@ -47,7 +47,7 @@ public final class ContenutiInnocui implements RegistroInnocui {
 
     @Override
     public DefinizioneInnocuo get(String id) {
-        //se non lo troviamo lanciamo un'illegalargumentexception
+        
         if (!innocuoPerId.containsKey(id)) 
             throw new IllegalArgumentException("Processo innocuo sconosciuto: " + id);
         

@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.Nodo;
 
+/** Nodo che definisce un combattimento tramite rango e id dei combattenti/innocui. */
 public class NodoCombattimento extends Nodo {
 
     private final int rango;

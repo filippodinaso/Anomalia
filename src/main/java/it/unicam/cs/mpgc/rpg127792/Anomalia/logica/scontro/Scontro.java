@@ -63,7 +63,7 @@ public final class Scontro {
 /**
  *  Usa un'abilità durante il turno del giocatore
  *
- *  @param abilita 
+ *  @param abilità 
  *  @param bersaglio se l'abilità lo richiede 
  *  @return true se l'abilità viene usata, false se non può essere eseguita
  */

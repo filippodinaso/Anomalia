@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-//schermata principale: statistiche e mappa capitolo 
+/**schermata principale: statistiche e mappa capitolo*/
 public final class SchermataHub extends BorderPane {
 
     public SchermataHub(GestoreSchermate gestore, Partita partita) {
@@ -41,8 +41,7 @@ public final class SchermataHub extends BorderPane {
         Label titoloCapitolo = new Label(nomeCapitolo);
         titoloCapitolo.getStyleClass().add("titolo-capitolo");
 
-        MappaView vistaMappa = new MappaView(avanzamento, nodoScelto -> gestore.apri(partita, nodoScelto));
-
+        MappaView vistaMappa = new MappaView(avanzamento, nodoScelto -> gestore.apri(nodoScelto));
         Label messaggioStato = new Label(testoMessaggioStato(partita));
 
         VBox areaCentrale = new VBox(14, titoloCapitolo, vistaMappa, messaggioStato);
@@ -57,7 +56,6 @@ public final class SchermataHub extends BorderPane {
         
         if (partita.haCapitoloSuccessivo()) 
             return "Capitolo concluso. Procedi al capitolo successivo.";
-        
         return "Hai completato tutti i capitoli!";
     }
 
@@ -69,10 +67,7 @@ public final class SchermataHub extends BorderPane {
 
         if (partita.isCapitoloConcluso() && partita.haCapitoloSuccessivo()) {
             Button bottoneAvanti = new Button("> PROSSIMO CAPITOLO");
-            bottoneAvanti.setOnAction(evento -> {
-                partita.avanzaCapitolo();
-                gestore.mostraHub(partita);
-            });
+            bottoneAvanti.setOnAction(evento -> gestore.avanzaCapitolo());
             barraInferiore.getChildren().add(bottoneAvanti);
         }
 

@@ -1,7 +1,6 @@
 package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione;
 
-//Gestiamo la ricarica (dinamica) 
-
+/**Gestiamo la ricarica (dinamica) */
 public final class AbilitàInUso {
 
    private final Abilità definizione;

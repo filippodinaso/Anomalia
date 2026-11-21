@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.nodi;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.Nodo;
 
+/** Ripristina l'integrità all'ingresso e può essere rivisitato. */
 public class NodoCheckpoint extends Nodo {
 
     public NodoCheckpoint(String id, String descrizione) {

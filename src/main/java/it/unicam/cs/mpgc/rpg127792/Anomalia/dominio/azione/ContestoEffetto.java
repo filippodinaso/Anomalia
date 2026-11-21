@@ -6,35 +6,47 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.entita.Combattente;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.EventoDiGioco;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.evento.Pubblicatore;
 
-//Contesto per applicare effetto, contiene esecutore, chi sono i bersagli e il pubblicatore per inviare le notifiche.
+/*Contesto per applicare effetto, contiene esecutore, chi sono i bersagli e il pubblicatore per inviare le notifiche.*/
 
 public record ContestoEffetto(Combattente esecutore, List<Combattente> bersagli, Pubblicatore<EventoDiGioco> eventi){
 
-public ContestoEffetto{
+    public ContestoEffetto{
 
-    if (esecutore==null) 
-        throw new IllegalArgumentException("L'esecutore non può essere nullo.");
+         if (esecutore==null) 
+             throw new IllegalArgumentException("L'esecutore non può essere nullo.");
 
-    if (eventi == null)
-        throw new IllegalArgumentException("Il pubblicatore non può essere nullo.");
+         if (eventi == null)
+             throw new IllegalArgumentException("Il pubblicatore non può essere nullo.");
 
-    if (bersagli==null || bersagli.isEmpty())
-        throw new IllegalArgumentException("La lista dei bersagli non può essere vuota.");
+         if (bersagli==null || bersagli.isEmpty())
+             throw new IllegalArgumentException("La lista dei bersagli non può essere vuota.");
 
     //Copiamo lista bersagli per averne una immutabile garantendo il contesto
     bersagli = List.copyOf(bersagli);
 }
 
-//Colpire un bersaglio (per attacchi)
-public static ContestoEffetto contro(Combattente esecutore, Combattente bersaglio, Pubblicatore<EventoDiGioco> eventi) {
-    return new ContestoEffetto(esecutore, List.of(bersaglio), eventi);
-}
 
-//Colpire se stessi (per difesa)
-public static ContestoEffetto suSeStesso(Combattente esecutore, Pubblicatore<EventoDiGioco> eventi) {
-    return new ContestoEffetto(esecutore, List.of(esecutore), eventi);
-}
+/**
+ *  Crea un contesto con un esecutore e un bersaglio.
+ * 
+ *  @param esecutore
+ *  @param bersaglio
+ *  @param eventi
+ *  @return contesto creato con il bersaglio indicato
+ */
+    public static ContestoEffetto contro(Combattente esecutore, Combattente bersaglio, Pubblicatore<EventoDiGioco> eventi) {
+         return new ContestoEffetto(esecutore, List.of(bersaglio), eventi);
+    }
 
-
+/**
+ *  Crea un contesto in cui l'esecutore è anche il bersaglio.
+ * 
+ *  @param esecutore
+ *  @param eventi
+ *  @return contesto creato con l'esecutore come bersaglio
+ */
+    public static ContestoEffetto suSeStesso(Combattente esecutore, Pubblicatore<EventoDiGioco> eventi) {
+         return new ContestoEffetto(esecutore, List.of(esecutore), eventi);
+    }
 }
 

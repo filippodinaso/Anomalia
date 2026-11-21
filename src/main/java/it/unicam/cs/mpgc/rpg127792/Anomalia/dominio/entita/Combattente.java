@@ -7,10 +7,12 @@ public abstract class Combattente{
     private int integritaMassima; //l'integrità massima può aumentare
     private int scudo; // Il danno viene assorbito prima dallo scudo e poi dall'integrità
 
-
-
-//Costruttore
-
+/**
+ * 
+ * 
+ * @param nome
+ * @param integritaMassima
+ */
 protected Combattente(String nome, int integritaMassima){
 
     if(integritaMassima <= 0)
@@ -23,7 +25,7 @@ protected Combattente(String nome, int integritaMassima){
     this.integrita=integritaMassima;
 }
 
-//Metodi
+
     public RisultatoDanno subisciDanni(int danno) {
         int daAssorbire = Math.max(0, danno); // il danno non può essere negativo
         int assorbito = Math.min(scudo, daAssorbire); // quanto danno incassa lo scudo

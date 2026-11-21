@@ -28,12 +28,16 @@ public class ComportamentoBoss implements Comportamento{
     @Override
     public void agisci(Nemico esecutore, Giocatore giocatore, List<Nemico> alleati, Pubblicatore<EventoDiGioco> eventi) {
 
+        if (danno < 0 || scudo < 0 || turniPerScudo <= 0) {
+            throw new IllegalArgumentException("I valori del comportamento del boss non sono validi.");
+}
+
         int dannoAttuale = danno;
 
         //Se scende sotto il 50% l'integrità il boss raddoppia il danno
-        if (esecutore.getIntegrita() * 2 <= esecutore.getIntegritaMassima()) {
+        if (esecutore.getIntegrita() * 2 <= esecutore.getIntegritaMassima()) 
             dannoAttuale *= 2;
-        }
+        
 
         //Attacca ogni turno
         DannoDiretto.attacco(dannoAttuale).applica(ContestoEffetto.contro(esecutore, giocatore, eventi));
