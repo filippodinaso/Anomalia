@@ -10,7 +10,7 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.AbilitàInUso;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.innocuo.ProcessoInnocuo;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.nemico.Nemico;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controllori.ControllerScontro;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controller.ControllerScontro;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.scontro.StatoScontro;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

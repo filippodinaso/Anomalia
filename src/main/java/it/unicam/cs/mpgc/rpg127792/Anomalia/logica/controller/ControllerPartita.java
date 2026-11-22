@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controllori;
+package it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controller;
 
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.Nodo;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.mappa.RegistroCapitoli;

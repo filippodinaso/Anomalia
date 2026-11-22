@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controllori;
+package it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controller;
 
 import java.util.List;
 import java.util.Optional;

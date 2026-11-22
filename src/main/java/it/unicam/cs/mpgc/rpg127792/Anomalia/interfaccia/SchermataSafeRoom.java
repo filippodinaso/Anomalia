@@ -7,7 +7,7 @@ import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.Arsenale;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.azione.CatalogoAbilità;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Giocatore;
 import it.unicam.cs.mpgc.rpg127792.Anomalia.dominio.giocatore.Talento;
-import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controllori.ControllerSafeRoom;
+import it.unicam.cs.mpgc.rpg127792.Anomalia.logica.controller.ControllerSafeRoom;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

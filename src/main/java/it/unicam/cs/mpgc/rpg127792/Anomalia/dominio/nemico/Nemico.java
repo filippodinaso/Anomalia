@@ -15,8 +15,8 @@ public final class Nemico extends Combattente {
      //il drop dei nemici (la moneta del gioco)
     private final int frammentiDati;
     
-    /*ogni tipologia di nemico implementerà una strategy che ne descriverà il comportamento
-    oppure una stessa tipologia di nemico potrebbe usare più strategy */
+    /**Ogni tipologia di nemico implementa una strategy che ne descrive il comportamento;
+    una stessa tipologia di nemico potrebbe usare più strategy */
     private final Comportamento comportamento;
 
 

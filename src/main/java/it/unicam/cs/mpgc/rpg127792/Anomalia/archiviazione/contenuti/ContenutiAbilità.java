@@ -25,7 +25,7 @@ public final class ContenutiAbilità implements RegistroAbilità {
     public static final String ROUTINE_RIPRISTINO = "routine_ripristino";
     public static final String BUFFER_OVERFLOW = "buffer_overflow";
     public static final String FIREWALL_REATTIVO = "firewall_reattivo";
-    public static final String BOMBA_ATOMICA = "Bomba_Atomica";
+
 
     private final List<Abilità> arsenaleIniziale;
     private final List<CatalogoAbilità> catalogoNegozio;
@@ -53,10 +53,7 @@ public final class ContenutiAbilità implements RegistroAbilità {
                 new BersaglioSingolo(), List.of(DannoDiretto.attacco(45))), 150),
 
                 new CatalogoAbilità(new Abilità(FIREWALL_REATTIVO, "Firewall_Reattivo", 2, 1,
-                new BersaglioEsecutore(), List.of(new ScudoDiretto(10))), 100),
-
-                new CatalogoAbilità(new Abilità(BOMBA_ATOMICA, "Bomba_Atomica", 10, 5, 
-                new BersaglioArea(10), List.of(DannoDiretto.attacco(200))), 200));
+                new BersaglioEsecutore(), List.of(new ScudoDiretto(10))), 100));
 
         arsenaleIniziale.forEach(abilità -> abilitàPerId.put(abilità.id(), abilità));
         catalogoNegozio.forEach(voce -> abilitàPerId.put(voce.abilità().id(), voce.abilità()));

@@ -31,19 +31,22 @@ public final class ContenutiNemici implements RegistroNemici {
 
                 new DefinizioneNemico(ZOMBIE_PROCESS, "Zombie_Process", 
                     new Scaling(30, 5), new Scaling(15, 5),
-                    livello -> new ComportamentoAssalto(10 + 2 * livello)),
+                    livello -> new ComportamentoAssalto(new Scaling(10, 2).valore(livello))),
                
                 new DefinizioneNemico(INTERRUPT_REQUEST, "Interrupt_Request", 
                     new Scaling(20, 3), new Scaling(20, 5),
-                    livello -> new ComportamentoSabotaggio(8 + 2 * livello, 2)),
+                    livello -> new ComportamentoSabotaggio(  
+                               new Scaling(8, 2).valore(livello), 2)),
                 
                 new DefinizioneNemico(MUTEX_LOCK, "Mutex_Lock", 
                     new Scaling(50, 8), new Scaling(25, 5),
-                    livello -> new ComportamentoSupporto(5 + livello, 15, 3)),
+                    livello -> new ComportamentoSupporto(
+                               new Scaling(5, 1).valore(livello), 15, 3)),
                
                 new DefinizioneNemico(ROOT_HYPERVISOR, "Root_Hypervisor", 
                     new Scaling(100, 15), new Scaling(100, 20),
-                    livello -> new ComportamentoBoss(15 + 3 * livello, 25, 3)))
+                    livello -> new ComportamentoBoss(
+                               new Scaling(15, 3).valore(livello), 25, 3)))
                
                
                 .forEach(nemico -> nemiciPerId.put(nemico.id(), nemico));
